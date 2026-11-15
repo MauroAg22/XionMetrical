@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "XionMetrical — educational prototype (simulated data, not a medical device). Code written with AI assistance (Claude Code); see README 'AI usage'.",
+  "description": "XionMetrical — prototype (simulated data, not a medical device). Code written with AI assistance (Claude Code); see README 'AI usage'.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
