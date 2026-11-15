@@ -75,6 +75,8 @@ npm run dev     # http://localhost:3000
 npm run build   # static export to web/out
 ```
 
+**Video** (optional; needs local Piper TTS, FFmpeg and Google Chrome): the scripts in `video/scripts/` generate the narration, synthesize the sound and render the frames from the `/video-scene/` page (`cd video && npm install`, then `npm run render:live` while `npx next dev -p 3100` runs in `web/`). The official logos of the closing card are not in this repository: the render reads them from a local `assets/logos/` folder.
+
 Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_PATH=/XionMetrical` and publishes `web/out` to GitHub Pages on every push to `master`.
 
 ## Repository layout
@@ -84,6 +86,7 @@ Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_P
 | `web/` | Next.js (App Router, TypeScript, Tailwind) static site: landing `/` and demo `/demo` |
 | `web/src/lib/` | Indicator catalogue, simulation, traffic-light rule, measurement routine, guidance texts and sources (pure TypeScript) |
 | `web/src/components/demo/` | Pure demo components (also reused by the video renderer) |
+| `web/src/video/` | Video mode of the demo: the same components driven by one clock, served at `/video-scene/` (render only, not linked, `noindex`) |
 | `video/` | 30-second video pipeline: vector animation rendered frame by frame with Playwright + Chrome, Piper narration, synthesized sound, ffmpeg |
 
 ## NASA data and references
