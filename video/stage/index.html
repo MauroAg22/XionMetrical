@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>XionMetrical video stage</title>
+<!-- XionMetrical demo video stage (1920×1080). AI-assisted animation (Claude Opus 5.5 in Claude Code).
+     One clock: window.seek(t). Faceless silhouette; no NASA branding is drawn — the official logo strip
+     (assets/logos/logo-strip-1920x180.png, read in place) is shown unmodified. -->
+<link rel="stylesheet" href="stage.css">
+</head>
+<body>
+<div id="stage">
+
+  <!-- deep space (behind everything) -->
+  <svg id="space" class="full" viewBox="0 0 1920 1080" width="1920" height="1080">
+    <defs>
+      <radialGradient id="gDeep" cx=".5" cy=".42" r=".75"><stop offset="0" stop-color="#0d1a3a"/><stop offset=".55" stop-color="#071022"/><stop offset="1" stop-color="#03070f"/></radialGradient>
+      <radialGradient id="gNeb" cx=".72" cy=".28" r=".55"><stop offset="0" stop-color="#4c8dff" stop-opacity=".16"/><stop offset="1" stop-color="#4c8dff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="1920" height="1080" fill="url(#gDeep)"/>
+    <rect width="1920" height="1080" fill="url(#gNeb)"/>
+    <g id="starfield" fill="#dfe9ff"></g>
+  </svg>
+
+  <!-- spacecraft cabin (flat vector, one-point perspective) -->
+  <svg id="cabin" class="full" viewBox="0 0 1920 1080" width="1920" height="1080">
+    <defs>
+      <linearGradient id="gBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5872"/><stop offset="1" stop-color="#3a465e"/></linearGradient>
+      <linearGradient id="gCeil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#252f43"/><stop offset="1" stop-color="#36425b"/></linearGradient>
+      <linearGradient id="gFloor" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1b2333"/><stop offset="1" stop-color="#2e394f"/></linearGradient>
+      <linearGradient id="gWallL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#202a3b"/><stop offset="1" stop-color="#37435b"/></linearGradient>
+      <linearGradient id="gWallR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#202a3b"/><stop offset="1" stop-color="#37435b"/></linearGradient>
+      <linearGradient id="gCast" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+      <radialGradient id="gSpace" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#0c1838"/><stop offset="1" stop-color="#03060f"/></radialGradient>
+      <radialGradient id="gEarth" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#d6e8ff"/><stop offset="1" stop-color="#4c8dff"/></radialGradient>
+      <linearGradient id="gBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6a6a" stop-opacity=".8"/><stop offset="1" stop-color="#ff2a2a" stop-opacity="0"/></linearGradient>
+      <clipPath id="cWin"><circle cx="1290" cy="420" r="132"/></clipPath>
+      <filter id="chroma" x="0" y="0" width="1920" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feOffset id="chromaR" in="r" dx="5" dy="0" result="r2"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" result="gb"/>
+        <feOffset id="chromaGB" in="gb" dx="-5" dy="0" result="gb2"/>
+        <feBlend in="r2" in2="gb2" mode="screen"/>
+      </filter>
+    </defs>
+    <g id="cam">
+      <!-- room shell -->
+      <rect x="300" y="170" width="1320" height="660" fill="url(#gBack)"/>
+      <rect x="300" y="170" width="1320" height="150" fill="url(#gCast)"/>
+      <polygon points="0,0 1920,0 1620,170 300,170" fill="url(#gCeil)"/>
+      <polygon points="0,1080 1920,1080 1620,830 300,830" fill="url(#gFloor)"/>
+      <polygon points="0,0 300,170 300,830 0,1080" fill="url(#gWallL)"/>
+      <polygon points="1920,0 1620,170 1620,830 1920,1080" fill="url(#gWallR)"/>
+      <g fill="none" stroke="#1a2232" stroke-width="3" opacity=".85">
+        <line x1="100" y1="56.7" x2="100" y2="996.7"/><line x1="200" y1="113.3" x2="200" y2="913.3"/>
+        <line x1="1820" y1="56.7" x2="1820" y2="996.7"/><line x1="1720" y1="113.3" x2="1720" y2="913.3"/>
+        <line x1="105.9" y1="60" x2="1814.1" y2="60"/><line x1="211.8" y1="120" x2="1708.2" y2="120"/>
+        <line x1="96" y1="1000" x2="1824" y2="1000"/><line x1="192" y1="920" x2="1728" y2="920"/>
+        <line x1="720" y1="170" x2="720" y2="830" opacity=".5"/><line x1="1110" y1="170" x2="1110" y2="830" opacity=".5"/>
+        <line x1="720" y1="600" x2="1110" y2="600" opacity=".5"/>
+      </g>
+      <g fill="none" stroke="#141b28" stroke-width="5">
+        <polyline points="0,0 300,170 1620,170 1920,0"/><polyline points="0,1080 300,830 1620,830 1920,1080"/>
+        <line x1="300" y1="170" x2="300" y2="830"/><line x1="1620" y1="170" x2="1620" y2="830"/>
+      </g>
+      <!-- ceiling light, cables, alarm beacon -->
+      <polygon id="lightStrip" points="870,0 1050,0 1026,104 894,104" fill="#fff2d6" opacity=".9"/>
+      <path d="M300 178 C520 214 720 188 930 214 S1350 198 1620 180" fill="none" stroke="#141a27" stroke-width="9"/>
+      <path d="M300 186 C540 226 760 200 960 228 S1380 210 1620 188" fill="none" stroke="#283247" stroke-width="4"/>
+      <!-- left wall stowage net -->
+      <g fill="none" stroke="#46546f" stroke-width="3" opacity=".8">
+        <path d="M40 330 L250 350 M40 410 L250 422 M40 490 L250 494 M40 570 L250 566"/>
+        <path d="M70 320 L70 590 M130 326 L130 584 M190 334 L190 578"/>
+      </g>
+      <!-- left rack: monitor, panels, LEDs, drawers -->
+      <g>
+        <rect x="330" y="200" width="370" height="600" rx="10" fill="#2f394d" stroke="#56647f" stroke-width="3"/>
+        <rect x="356" y="226" width="318" height="170" rx="8" fill="#0b1426" stroke="#5f6f8c" stroke-width="3"/>
+        <rect x="372" y="244" width="120" height="14" rx="4" fill="#24406e"/>
+        <polyline id="monEcg" points="372,330 420,330 432,308 444,352 456,330 520,330 532,310 544,350 556,330 620,330 632,308 644,352 656,330 664,330" fill="none" stroke="#4c8dff" stroke-width="4" stroke-linejoin="round"/>
+        <rect x="356" y="420" width="150" height="110" rx="6" fill="#28324a" stroke="#4c5a74" stroke-width="2"/>
+        <rect x="524" y="420" width="150" height="110" rx="6" fill="#28324a" stroke="#4c5a74" stroke-width="2"/>
+        <g fill="#3c4860" stroke="#6a7a98" stroke-width="3"><circle cx="396" cy="475" r="18"/><circle cx="466" cy="475" r="18"/><circle cx="564" cy="475" r="18"/></g>
+        <g fill="#56647f"><rect x="604" y="452" width="16" height="44" rx="5"/><rect x="636" y="452" width="16" height="44" rx="5"/></g>
+        <g id="leds"><circle cx="372" cy="556" r="7"/><circle cx="412" cy="556" r="7"/><circle cx="452" cy="556" r="7"/><circle cx="492" cy="556" r="7"/><circle cx="532" cy="556" r="7"/><circle cx="572" cy="556" r="7"/><circle cx="612" cy="556" r="7"/><circle cx="652" cy="556" r="7"/></g>
+        <rect x="356" y="590" width="318" height="90" rx="6" fill="#2a3446" stroke="#4c5a74" stroke-width="2"/>
+        <rect x="356" y="694" width="318" height="90" rx="6" fill="#2a3446" stroke="#4c5a74" stroke-width="2"/>
+        <g fill="#5a6886"><rect x="490" y="628" width="50" height="14" rx="7"/><rect x="490" y="732" width="50" height="14" rx="7"/></g>
+      </g>
+      <!-- handrails -->
+      <g fill="#9fb0cc"><rect x="760" y="236" width="330" height="12" rx="6"/><rect x="772" y="236" width="10" height="26" rx="3"/><rect x="1068" y="236" width="10" height="26" rx="3"/><rect x="1132" y="620" width="12" height="190" rx="6"/></g>
+      <!-- window with Earth far behind -->
+      <g>
+        <circle cx="1290" cy="420" r="168" fill="#2b3446" stroke="#5c6a86" stroke-width="4"/>
+        <g id="bolts" fill="#56647f"></g>
+        <circle cx="1290" cy="420" r="148" fill="#1d2534" stroke="#4a5873" stroke-width="3"/>
+        <circle cx="1290" cy="420" r="132" fill="url(#gSpace)"/>
+        <g clip-path="url(#cWin)"><g id="winStars" fill="#e6eeff"></g></g>
+        <circle cx="1238" cy="462" r="15" fill="#4c8dff" opacity=".2"/>
+        <circle cx="1238" cy="462" r="6" fill="url(#gEarth)"/>
+        <g id="earthTag" style="visibility:hidden">
+          <line x1="1246" y1="455" x2="1296" y2="404" stroke="#cfe0ff" stroke-width="2"/>
+          <text x="1302" y="400" fill="#e8eef9" font-size="22" letter-spacing="3" style="font-family:var(--display)">EARTH</text>
+        </g>
+        <path d="M1196 336 A132 132 0 0 1 1326 296" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="10" stroke-linecap="round"/>
+      </g>
+      <!-- right rack: stowage bags -->
+      <g>
+        <rect x="1478" y="210" width="122" height="600" rx="10" fill="#2f394d" stroke="#56647f" stroke-width="3"/>
+        <rect x="1492" y="230" width="94" height="170" rx="16" fill="#3b475f"/><rect x="1492" y="414" width="94" height="170" rx="16" fill="#354158"/><rect x="1492" y="598" width="94" height="192" rx="16" fill="#3b475f"/>
+        <g stroke="#56647f" stroke-width="4"><line x1="1492" y1="300" x2="1586" y2="300"/><line x1="1492" y1="490" x2="1586" y2="490"/><line x1="1492" y1="690" x2="1586" y2="690"/></g>
+      </g>
+      <!-- floor foot loops -->
+      <g fill="none" stroke="#6f7f9c" stroke-width="8" stroke-linecap="round"><path d="M660 960 q40 -34 80 0"/><path d="M1180 960 q40 -34 80 0"/></g>
+      <!-- alarm beacon -->
+      <path id="beaconDome" d="M928 170 A32 24 0 0 0 992 170 Z" fill="#4a3434" stroke="#1a2232" stroke-width="3"/>
+      <g id="beam" style="mix-blend-mode:screen"><polygon points="960,182 700,1080 1220,1080" fill="url(#gBeam)"/></g>
+
+      <!-- astronaut: faceless silhouette, floats (microgravity). A = viewer-left limbs, B = viewer-right -->
+      <g id="astro" style="filter:drop-shadow(0 0 9px rgba(120,160,255,.38))">
+        <g id="legA" class="suit"><g id="thighA"><rect x="-28" y="-14" width="56" height="176" rx="28"/></g><g id="kneeA"><rect x="-23" y="-10" width="46" height="164" rx="23"/><ellipse class="shoe" cx="0" cy="158" rx="29" ry="18"/></g></g>
+        <g id="legB" class="suit"><g id="thighB"><rect x="-28" y="-14" width="56" height="176" rx="28"/></g><g id="kneeB"><rect x="-23" y="-10" width="46" height="164" rx="23"/><ellipse class="shoe" cx="0" cy="158" rx="29" ry="18"/></g></g>
+        <path class="suit" d="M-64 -150 Q-66 -170 -40 -172 L40 -172 Q66 -170 64 -150 L55 22 Q57 70 50 94 L-50 94 Q-57 70 -55 22 Z"/>
+        <rect class="belt" x="-53" y="38" width="106" height="14" rx="5"/>
+        <path class="seam" d="M-18 -172 L0 -148 L18 -172 M0 -148 L0 88 M16 -128 h30 v34 h-30 z"/>
+        <rect class="skin" x="-14" y="-192" width="28" height="28" rx="8"/>
+        <g id="head"><ellipse class="skin" cx="0" cy="-226" rx="37" ry="45"/><path class="hair" d="M-37 -228 Q-39 -272 0 -272 Q39 -272 37 -228 Q33 -252 0 -254 Q-33 -252 -37 -228 Z"/></g>
+        <g id="armB" class="suit"><rect x="-21" y="-14" width="42" height="140" rx="21"/><g id="elbowB"><rect x="-18" y="-10" width="36" height="128" rx="18"/><circle class="skin" cx="0" cy="120" r="21"/></g></g>
+        <g id="armA" class="suit"><rect x="-21" y="-14" width="42" height="140" rx="21"/><g id="elbowA"><rect x="-18" y="-10" width="36" height="128" rx="18"/><circle class="skin" cx="0" cy="120" r="21"/></g></g>
+      </g>
+      <!-- tablet (screen 176×99 = 16:9, the camera pushes into it) -->
+      <g id="tablet">
+        <rect x="-100" y="-62" width="200" height="124" rx="13" fill="#0a111f" stroke="#6a7da3" stroke-width="3"/>
+        <rect x="-88" y="-49.5" width="176" height="99" rx="3" fill="#0d1d3a"/>
+        <rect x="-82" y="-44" width="164" height="9" rx="2" fill="#17284f"/>
+        <circle cx="-56" cy="-18" r="7" fill="#8db8ff"/><rect x="-65" y="-9" width="18" height="34" rx="7" fill="#8db8ff"/><circle cx="-56" cy="-1" r="3.2" fill="#4c8dff"/>
+        <rect x="-32" y="-28" width="108" height="20" rx="3" fill="#17284f"/><rect x="-32" y="-4" width="108" height="20" rx="3" fill="#17284f"/><rect x="-32" y="20" width="108" height="20" rx="3" fill="#17284f"/>
+        <polyline points="-26,-14 -10,-18 6,-15 22,-20 38,-17 54,-22 70,-19" fill="none" stroke="#4c8dff" stroke-width="2.4"/>
+        <path d="M-88 -49.5 L-10 -49.5 L-60 49.5 L-88 49.5 Z" fill="#ffffff" opacity=".05"/>
+      </g>
+      <circle id="thumb" class="skin" r="12"/>
+    </g>
+  </svg>
+
+  <!-- cabin lighting -->
+  <div id="tintRed" class="full"></div>
+  <div id="flashRed" class="full"></div>
+  <div id="tintAmber" class="full"></div>
+  <div id="winGlow" class="full"></div>
+  <div id="vig" class="full"></div>
+
+  <!-- app scenes (placeholder until /video-scene/ exists; ?app=live loads the real web components) -->
+  <div id="appwrap">
+    <div id="appPh">
+      <div id="phScene"></div><div id="phT"></div><div id="phMain"></div><div id="phCard"></div><div id="phSub"></div>
+      <div id="phNote">Placeholder — the real app scene (web components in video mode) goes here</div>
+    </div>
+  </div>
+
+  <!-- name card -->
+  <div id="brand">
+    <div id="brandGlow" class="full"></div>
+    <div id="wordmark"><span class="a">Xion</span><span class="b">Metrical</span></div>
+    <div id="tagline">Precision bio-telemetry for deep space missions.</div>
+    <svg id="ecg" viewBox="0 0 1920 200" width="1920" height="200">
+      <path id="ecgLine" d="M-40 100 L820 100 Q845 82 870 100 L905 100 L918 114 L934 -6 L950 150 L964 100 L1000 100 Q1040 74 1080 100 L1960 100" fill="none" stroke="#4c8dff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+      <path id="ecgPulse" d="M-40 100 L820 100 Q845 82 870 100 L905 100 L918 114 L934 -6 L950 150 L964 100 L1000 100 Q1040 74 1080 100 L1960 100" fill="none" stroke="#d6e6ff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- credits + official logo strip (unmodified image, opacity fade only) -->
+  <div id="credits">
+    <div id="next"><span class="lbl">Next:</span>
+      <svg class="ico" viewBox="0 0 48 48"><rect x="14" y="12" width="20" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M18 12 V4 h12 v8 M18 36 v8 h12 v-8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 18 v6 l4 3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>wearables<span class="sep">·</span><svg class="ico" viewBox="0 0 48 48"><circle cx="32" cy="30" r="11" fill="none" stroke="currentColor" stroke-width="3"/><path d="M21 30 h22 M32 19 c-6 6 -6 16 0 22 M32 19 c6 6 6 16 0 22" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="3.5" fill="currentColor"/><path d="M11 14 L22 22" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 3"/></svg>Earth link</div>
+    <div id="team">Team Space Mercedes</div>
+    <div id="names"><span>Ezequiel Adrián Vilchez Baigorria</span><span>Mauro Agustín Lucero</span><span>Alejandro Héctor Rodriguez</span><br><span>Esteban David Torres</span><span>Cristian Emanuel Cáceres</span></div>
+    <img id="logos" src="/__assets/logos/logo-strip-1920x180.png" width="1920" height="180" alt="NASA and NASA Space Apps Challenge logos">
+  </div>
+
+  <!-- tape rewind effects -->
+  <div id="scan" class="full"></div>
+  <svg id="noise" class="full" viewBox="0 0 1920 1080" width="1920" height="1080"></svg>
+
+  <!-- titles -->
+  <div id="lowband"></div>
+  <div id="t1a">Mid-way to Mars.</div>
+  <div id="t1b">Earth is up to 20 minutes away.</div>
+  <div id="qband"></div>
+  <div id="question">What if he’d seen it coming?</div>
+  <div id="osdRew">◀◀ REW</div>
+  <div id="day"><span class="k">MISSION DAY</span><span class="num">11<span class="roll"><span id="strip"><b>0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b><b>8</b><b>9</b></span></span></span></div>
+  <div id="montTitle">10 indicators<span class="dot">·</span>5 hazards<span class="dot">·</span>every tip cites its source</div>
+  <div id="refChip">Reference limits: NASA-STD-3001</div>
+  <div id="caption"></div>
+
+  <!-- persistent labels -->
+  <div id="proto"><i></i>Prototype · simulated data</div>
+  <div id="wm">AI-assisted animation</div>
+  <div id="flash" class="full"></div>
+</div>
+<script src="timeline.js"></script>
+<script src="stage.js"></script>
+</body>
+</html>

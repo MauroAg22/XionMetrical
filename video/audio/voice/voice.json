@@ -1,0 +1,96 @@
+{
+  "engine": "Piper TTS (piper-tts 1.8.0), voice en_US-joe-medium",
+  "aiGenerated": true,
+  "lines": [
+    {
+      "id": "v1",
+      "text": "What if he'd seen it coming?",
+      "tts": "What if he'd seen it coming?",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v1.wav",
+      "dur": 1.303
+    },
+    {
+      "id": "v2a",
+      "text": "Days earlier, his data was drifting from his baseline.",
+      "tts": "Days earlier, his data was drifting from his baseline.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v2a.wav",
+      "dur": 2.946
+    },
+    {
+      "id": "v2b",
+      "text": "The app flagged it, without waiting for Earth.",
+      "tts": "The app flagged it, without waiting for Earth.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v2b.wav",
+      "dur": 2.094
+    },
+    {
+      "id": "v3",
+      "text": "XionMetrical. Precision bio-telemetry for deep space missions.",
+      "tts": "Zy-on Metrical. Precision bio-telemetry for deep space missions.",
+      "variant": "A",
+      "lengthScale": 0.92,
+      "file": "v3.wav",
+      "dur": 4.079
+    },
+    {
+      "id": "v4a",
+      "text": "Ten indicators. Five hazards.",
+      "tts": "Ten indicators. Five hazards.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v4a.wav",
+      "dur": 2.375
+    },
+    {
+      "id": "v4b",
+      "text": "Your baseline.",
+      "tts": "Your baseline.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v4b.wav",
+      "dur": 0.791
+    },
+    {
+      "id": "v4c",
+      "text": "Sourced guidance.",
+      "tts": "Sourced guidance.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v4c.wav",
+      "dur": 0.962
+    },
+    {
+      "id": "v4d",
+      "text": "And an emergency guide.",
+      "tts": "And an emergency guide.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v4d.wav",
+      "dur": 1.543
+    },
+    {
+      "id": "v5a",
+      "text": "Next: wearables and an Earth link.",
+      "tts": "Next: wearables and an Earth link.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v5a.wav",
+      "dur": 2.084
+    },
+    {
+      "id": "v5b",
+      "text": "Team Space Mercedes.",
+      "tts": "Team Space Mercedes.",
+      "variant": null,
+      "lengthScale": 0.92,
+      "file": "v5b.wav",
+      "dur": 1.383
+    }
+  ]
+}
