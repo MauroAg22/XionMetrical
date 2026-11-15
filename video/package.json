@@ -1,0 +1,13 @@
+{
+  "name": "xionmetrical-video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Render pipeline for the 30 s XionMetrical demo video (AI-assisted animation; narration generated with Piper TTS; procedurally generated sound effects).",
+  "scripts": {
+    "frame-test": "node scripts/frame-test.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "^1.65.1"
+  }
+}

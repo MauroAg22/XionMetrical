@@ -1,0 +1,26 @@
+{
+  "name": "xionmetrical-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "XionMetrical — educational prototype (simulated data, not a medical device). Code written with AI assistance (Claude Code); see README 'AI usage'.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "test": "node --test \"src/lib/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
+  }
+}

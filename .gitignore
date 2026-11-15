@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Compilados de la web
+web/.next/
+web/out/
+web/next-env.d.ts
+*.tsbuildinfo
+
+# Video: herramientas locales (Piper, voces), fotogramas y temporales
+video/tools/
+video/frames/
+video/tmp/
+video/.cache/
+
+# Entorno y sistema
+.env
+.env.*
+.DS_Store
+Thumbs.db
+desktop.ini
