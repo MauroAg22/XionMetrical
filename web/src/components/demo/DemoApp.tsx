@@ -104,6 +104,7 @@ export default function DemoApp() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 pt-4">
+        <h1 className="sr-only">XionMetrical interactive demo (simulated data)</h1>
         <section aria-label="Mission timeline" className="rounded-2xl border border-space-700 bg-space-900/85 p-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>

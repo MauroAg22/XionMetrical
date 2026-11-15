@@ -1,6 +1,7 @@
 // Clickable 2D human figure (faceless, flat). Each zone shows the worst
 // traffic-light status of its indicators, with a shape + word label so the
 // state never depends on color alone. Pure: everything derives from `day`.
+import { useId } from "react";
 import type { KeyboardEvent } from "react";
 import { zoneStatus } from "@/lib/assess";
 import { INDICATORS, STATUS_LABEL, ZONES } from "@/lib/model";
@@ -43,6 +44,10 @@ export function leadIndicator(zone: ZoneId, day: number): IndicatorId {
 }
 
 export function BodyFigure({ day, selectedZone = null, onSelect, className = "" }: Props) {
+  // Unique SVG ids: the landing shows two figures on the same page.
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "");
+  const glowId = `xm-glow-${uid}`;
+  const suitId = `xm-suit-${uid}`;
   const zs = zoneStatus(day);
   const interactive = !!onSelect;
 
@@ -72,18 +77,18 @@ export function BodyFigure({ day, selectedZone = null, onSelect, className = "" 
   return (
     <svg viewBox="-12 0 384 540" className={`h-auto w-full select-none ${className}`} role="group" aria-label={`Body map for mission day ${day} (simulated data)`}>
       <defs>
-        <filter id="xm-glow" x="-30%" y="-10%" width="160%" height="120%">
+        <filter id={glowId} x="-30%" y="-10%" width="160%" height="120%">
           <feDropShadow dx="0" dy="0" stdDeviation="5" floodColor={fillFor("body")} floodOpacity={zs.body === "normal" ? 0.35 : 0.85} />
         </filter>
-        <linearGradient id="xm-suit" x1="0" x2="0" y1="0" y2="1">
+        <linearGradient id={suitId} x1="0" x2="0" y1="0" y2="1">
           <stop offset="0" stopColor="#22376a" />
           <stop offset="1" stopColor="#152447" />
         </linearGradient>
       </defs>
 
       {/* whole body = the silhouette itself */}
-      <g {...zoneProps("body")} filter="url(#xm-glow)">
-        <g stroke="url(#xm-suit)" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <g {...zoneProps("body")} filter={`url(#${glowId})`}>
+        <g stroke={`url(#${suitId})`} strokeLinecap="round" strokeLinejoin="round" fill="none">
           <path d="M126 124 L106 210 L98 290" strokeWidth="26" />
           <path d="M234 124 L254 210 L262 290" strokeWidth="26" />
           <path d="M160 276 L156 392 L152 498" strokeWidth="34" />
@@ -93,9 +98,9 @@ export function BodyFigure({ day, selectedZone = null, onSelect, className = "" 
         <circle cx="262" cy="300" r="13" fill="#1d3060" />
         <ellipse cx="148" cy="512" rx="21" ry="10" fill="#1d3060" />
         <ellipse cx="212" cy="512" rx="21" ry="10" fill="#1d3060" />
-        <path d="M128 110 Q180 98 232 110 L238 142 Q232 212 222 272 Q180 290 138 272 Q128 212 122 142 Z" fill="url(#xm-suit)" />
+        <path d="M128 110 Q180 98 232 110 L238 142 Q232 212 222 272 Q180 290 138 272 Q128 212 122 142 Z" fill={`url(#${suitId})`} />
         <rect x="168" y="86" width="24" height="20" rx="8" fill="#1d3060" />
-        <circle cx="180" cy="56" r="34" fill="url(#xm-suit)" />
+        <circle cx="180" cy="56" r="34" fill={`url(#${suitId})`} />
         {selectedZone === "body" && (
           <path d="M128 110 Q180 98 232 110 L238 142 Q232 212 222 272 Q180 290 138 272 Q128 212 122 142 Z" fill="none" stroke="#fff" strokeWidth="2" />
         )}
