@@ -24,8 +24,9 @@ const SCENES = {
 const SHOTS = [18.2, 20.7, 22.1, 23.6];
 // Narration cue starts (s); { after, gap } = right after another line.
 const CUES = { v1: 4.3, v2a: 6.55, v2b: 10.0, v3: 14.0, v4a: 18.3, v4b: 20.8, v4c: 22.2, v4d: 23.7, v5a: 25.65, v5b: { after: "v5a", gap: 0.14 } };
-// Lines that are not already on screen as a title get burned-in captions.
-const CAPTIONED = new Set(["v2a", "v2b", "v4a", "v4b", "v4c", "v4d"]);
+// Burned-in captions: none (team decision 2026-11-15: the English narration is enough; the SRT stays as a
+// separate optional file). To bring them back, list the line ids, e.g. ["v2a", "v2b", "v4a", "v4b", "v4c", "v4d"].
+const CAPTIONED = new Set([]);
 // Choreography inside /video-scene/?scene=alert (local seconds; shared with page.tsx in B2).
 const ALERT = { dayFrom: 113, dayTo: 115, dayStart: 1.6, dayEnd: 3.4, flagAt: 3.8, panelAt: 5.0 };
 
