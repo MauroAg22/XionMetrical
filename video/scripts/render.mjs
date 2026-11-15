@@ -79,7 +79,7 @@ execFileSync(
     "-framerate", String(fps), "-start_number", String(f0), "-i", path.join(FRAMES, `f%05d.${ext}`),
     "-ss", String(from), "-t", String(to - from), "-i", path.join(AUDIO_DIR, "mix.wav"),
     "-map", "0:v:0", "-map", "1:a:0",
-    "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p",
+    "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv",
     "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-profile:v", "high", "-level:v", "4.1", "-r", String(fps), "-g", String(fps * 2),
     "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
     "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",

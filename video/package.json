@@ -12,6 +12,9 @@
     "serve": "node scripts/server.mjs --port 4100",
     "render:test": "node scripts/render.mjs --from 0 --to 10 --out tmp/xionmetrical-test-0-10s.mp4",
     "render": "node scripts/render.mjs",
+    "render:live": "node scripts/render.mjs --app live --proxy http://localhost:3100",
+    "srt": "node scripts/srt.mjs",
+    "snap": "node scripts/snap.mjs",
     "frame-test": "node scripts/frame-test.mjs"
   },
   "dependencies": {

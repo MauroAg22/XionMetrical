@@ -4,6 +4,7 @@
 //   anything else -> web/out/ (static export), or, with --proxy <url>, forwarded to a running `next dev`.
 //   node scripts/server.mjs [--port 4100] [--proxy http://localhost:3100]
 import http from "node:http";
+import net from "node:net";
 import { createReadStream, existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -69,7 +70,7 @@ export function startServer({ port = 0, host = "127.0.0.1", proxy = null, webOut
     if (url.pathname.startsWith("/__assets/")) return send(res, resolveStatic(ASSETS, url.pathname.slice("/__assets".length)));
     if (url.pathname.startsWith("/__stage/")) return send(res, resolveStatic(STAGE, url.pathname.slice("/__stage".length)));
     if (target) {
-      const preq = http.request({ hostname: target.hostname, port: target.port, path: req.url, method: req.method, headers: { ...req.headers, host: target.host } }, (pres) => {
+      const preq = http.request({ hostname: target.hostname, port: target.port, path: req.url, method: req.method, headers: { ...req.headers, host: target.host, ...(req.headers.origin ? { origin: target.origin } : {}) } }, (pres) => {
         res.writeHead(pres.statusCode ?? 502, pres.headers);
         pres.pipe(res);
       });
@@ -81,6 +82,24 @@ export function startServer({ port = 0, host = "127.0.0.1", proxy = null, webOut
       return;
     }
     send(res, resolveStatic(webOut, url.pathname));
+  });
+  // `next dev` needs its HMR websocket before it hydrates: tunnel upgrades to the proxied server
+  // (Host and Origin rewritten to the target: next dev rejects cross-origin dev requests)
+  server.on("upgrade", (req, socket, head) => {
+    if (!target) return socket.destroy();
+    const up = net.connect(Number(target.port) || 80, target.hostname, () => {
+      const h = [];
+      for (let i = 0; i < req.rawHeaders.length; i += 2) {
+        const k = req.rawHeaders[i];
+        h.push(`${k}: ${/^host$/i.test(k) ? target.host : /^origin$/i.test(k) ? target.origin : req.rawHeaders[i + 1]}`);
+      }
+      up.write(`${req.method} ${req.url} HTTP/${req.httpVersion}\r\n${h.join("\r\n")}\r\n\r\n`);
+      if (head?.length) up.write(head);
+      up.pipe(socket);
+      socket.pipe(up);
+    });
+    up.on("error", () => socket.destroy());
+    socket.on("error", () => up.destroy());
   });
   return new Promise((resolve) =>
     server.listen(port, host, () => resolve({ port: server.address().port, close: () => new Promise((r) => server.close(r)) })),
