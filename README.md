@@ -84,7 +84,6 @@ Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_P
 | `web/src/lib/` | Indicator catalogue, simulation, traffic-light rule, guidance texts and sources (pure TypeScript) |
 | `web/src/components/demo/` | Pure demo components (also reused by the video renderer) |
 | `video/` | 30-second video pipeline: vector animation rendered frame by frame with Playwright + Chrome, Piper narration, synthesized sound, ffmpeg |
-| `docs/` | Team documentation (Spanish): decisions, plan, knowledge base and the **declarations registry** (`docs/REGISTRO-DECLARACIONES.md`) |
 
 ## NASA data and references
 
@@ -107,11 +106,11 @@ Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_P
 - European Society of Cardiology — 2025 press release on CPR in microgravity (preliminary manikin study)
 - NASA Space Apps Challenge 2026 — challenge page and video (challenge by the Brazilian Space Agency)
 
-Every source, with IDs and how it was used, is listed in `docs/REGISTRO-DECLARACIONES.md` (§4) and in `web/src/lib/sources.ts`.
+Every source cited by the app, with its ID and URL, is listed in `web/src/lib/sources.ts`.
 
 ## AI usage (SI)
 
-- **Planning and research support:** Claude Code (Anthropic) with Claude Sonnet 5.5 read and paraphrased the NASA, CSA and health-agency sources into a knowledge base and proposed options; the team accepted or rejected each one (all logged in the registry, entries IA-01 to IA-22).
+- **Planning and research support:** Claude Code (Anthropic) with Claude Sonnet 5.5 read and paraphrased the NASA, CSA and health-agency sources into a knowledge base and proposed options; the team accepted or rejected each one (each proposal and its outcome is logged in the team's internal declarations registry).
 - **Code:** the website, the demo, the tests and the video pipeline were written with Claude Code (Claude Opus 5.5) and reviewed by the team. Commits carry a `Co-Authored-By` trailer.
 - **Guidance texts:** drafted with AI from the cited sources — every line shows its source — and reviewed by the team.
 - **Video:** vector animation built with code with AI assistance (on-screen label "AI-assisted animation"); narration generated locally with **Piper TTS** (voice `en_US-joe-medium`, CC0 dataset); sound effects synthesized by code. No AI-generated images or video clips. Declared in the video metadata too.

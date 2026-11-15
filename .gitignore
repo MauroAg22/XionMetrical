@@ -22,3 +22,15 @@ desktop.ini
 
 # Herramientas locales de Claude Code (vista previa)
 .claude/
+
+# Publicación (decisión del equipo, 2026-11-15): el único markdown publicado es
+# README.md. El resto de los .md es de desarrollo y queda local.
+*.md
+!/README.md
+# Material local que no se publica (documentación, reto, chat, logos aportados)
+CLAUDE.md
+docs/
+info-desafio/
+chat/
+image/
+assets/logos/
