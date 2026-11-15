@@ -8,11 +8,11 @@ import { SOURCE_LIST } from "@/lib/sources";
 const REPO_URL = "https://github.com/MauroAg22/XionMetrical";
 
 const TEAM = [
-  "Ezequiel Adrián Vilchez Baigorria",
-  "Mauro Agustín Lucero",
-  "Alejandro Héctor Rodriguez",
-  "Esteban David Torres",
-  "Cristian Emanuel Cáceres",
+  { name: "Ezequiel Adrián Vilchez Baigorria", url: "https://ezequiel-vilchez-portafolio.vercel.app/", label: "Portfolio", email: "vilchezezequiel9@gmail.com" },
+  { name: "Mauro Agustín Lucero", url: "https://maurolucero.com.ar/", label: "Website", email: "mauroaglucero@gmail.com" },
+  { name: "Alejandro Héctor Rodriguez", url: "https://github.com/alerodriguezh910", label: "GitHub", email: "alerodriguezh910@gmail.com" },
+  { name: "Esteban David Torres", url: "https://github.com/Estebandtorres", label: "GitHub", email: "et45343@gmail.com" },
+  { name: "Cristian Emanuel Cáceres", url: "https://github.com/Cristian-EM-Caceres", label: "GitHub", email: "cacerescristianemanuel@gmail.com" },
 ];
 
 const HAZARD_TEXT: Record<HazardId, string> = {
@@ -28,7 +28,6 @@ const NAV = [
   ["#how", "How it works"],
   ["#inside", "Inside"],
   ["#demo", "Demo"],
-  ["#video", "Video"],
   ["#references", "NASA data"],
   ["#ai", "Use of AI"],
   ["#team", "Team"],
@@ -93,8 +92,8 @@ export default function Home() {
               <Link href="/demo/" className="rounded-xl bg-accent px-6 py-3 font-semibold text-space-950 hover:brightness-110">
                 Try the demo
               </Link>
-              <a href="#video" className="rounded-xl border border-space-600 px-6 py-3 font-semibold text-ink hover:bg-space-850">
-                Watch the video
+              <a href="#how" className="rounded-xl border border-space-600 px-6 py-3 font-semibold text-ink hover:bg-space-850">
+                How it works
               </a>
             </div>
           </div>
@@ -226,19 +225,7 @@ export default function Home() {
           </p>
         </Section>
 
-        {/* 6. Video */}
-        <Section id="video" eyebrow="Video" title="30 seconds: what if he'd seen it coming?">
-          <div className="flex aspect-video w-full max-w-4xl items-center justify-center rounded-2xl border border-dashed border-space-600 bg-space-900/80 p-6 text-center">
-            <div>
-              <p className="text-lg font-semibold text-ink">Video coming with our submission</p>
-              <p className="mt-2 text-sm text-muted">
-                Vector animation built with code (labeled “AI-assisted animation”), AI narration (Piper TTS) and synthesized sound effects.
-              </p>
-            </div>
-          </div>
-        </Section>
-
-        {/* 7. NASA data & references */}
+        {/* 6. NASA data & references */}
         <Section id="references" eyebrow="NASA data & references" title="Where every number and every tip comes from" className="bg-space-900/40">
           <p className="max-w-3xl text-muted">
             The demo uses <strong className="text-ink">simulated data</strong> for one example astronaut on a 1,080-day Mars mission (180 days out, 720 on the surface, 180 back),
@@ -291,7 +278,7 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 8. Use of AI */}
+        {/* 7. Use of AI */}
         <Section id="ai" eyebrow="Use of AI (SI)" title="What AI did — and what the team decided">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-space-700 bg-space-900/80 p-5">
@@ -328,7 +315,7 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 9. Future plan */}
+        {/* 8. Future plan */}
         <Section id="future" eyebrow="Future plan" title="Next: wearables and an Earth link" className="bg-space-900/40">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-space-700 bg-space-900/80 p-5">
@@ -347,20 +334,36 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 10. Team */}
+        {/* 9. Team */}
         <Section id="team" eyebrow="Team" title="Space Mercedes">
           <p className="text-muted">Universidad Nacional de Villa Mercedes (UNViMe) · Villa Mercedes, San Luis, Argentina · Local event: San Luis.</p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {TEAM.map((n) => (
-              <li key={n} className="rounded-2xl border border-space-700 bg-space-900/80 p-4 text-sm font-medium text-ink">
-                {n}
-              </li>
-            ))}
+            {TEAM.map((m) => {
+              const [user, domain] = m.email.split("@");
+              return (
+                <li key={m.name} className="flex flex-col rounded-2xl border border-space-700 bg-space-900/80 p-4 text-sm">
+                  <span className="font-medium text-ink">{m.name}</span>
+                  <a
+                    href={m.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${m.label}: ${m.name} (opens in a new tab)`}
+                    className="mt-3 w-fit text-accent-soft underline-offset-2 hover:text-ink hover:underline"
+                  >
+                    {m.label} <span aria-hidden>↗</span>
+                  </a>
+                  <a href={`mailto:${m.email}`} className="mt-1 w-fit text-xs text-muted underline-offset-2 [overflow-wrap:anywhere] hover:text-ink hover:underline">
+                    {user}
+                    <wbr />@{domain}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </Section>
       </main>
 
-      {/* 11. Footer */}
+      {/* 10. Footer */}
       <footer className="border-t border-space-800 bg-space-950 py-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>Educational prototype · simulated data · not a medical device</p>
