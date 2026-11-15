@@ -166,7 +166,7 @@ export default function Home() {
 
         {/* 4. What's inside */}
         <Section id="inside" eyebrow="What's inside" title="10 indicators · 5 hazards · every tip cites its source">
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               ["10 indicators", "The six the challenge names (heart rate, blood pressure, temperature, sleep, mood, blood sugar) plus radiation dose, CO₂, strength and nutrition, so all five hazards are covered."],
               ["A traffic light that isn't only color", "Normal (circle ✓), Drifting (triangle !) and Act now (octagon !) — a shape and a word for every state."],
@@ -174,6 +174,8 @@ export default function Home() {
               ["Trends with your band", "A day-by-day chart with your personal baseline band and the published limit, so you see where you are heading."],
               ["Guidance in 4 layers", "Status and why · what to do now · when to escalate · how to measure. Written from NASA and health-agency sources, never generated on the fly."],
               ["Emergency guide", "Chest pain or collapse: 8 steps to act on board first and message Earth without waiting. No medication advice."],
+              ["Measurement reminders", "A daily routine — on waking, before sleep, weekly — with how to measure each indicator and its source. Dosimeter and CO₂ monitor readings are automatic."],
+              ["Log today's measurements", "Type your heart rate, sleep and mood: the same rule checks them against your baseline right away. Nothing is stored or sent."],
             ].map(([t, d]) => (
               <li key={t} className="rounded-2xl border border-space-700 bg-space-900/80 p-5">
                 <h3 className="font-semibold text-ink">{t}</h3>
@@ -220,7 +222,7 @@ export default function Home() {
         <Section id="demo" eyebrow="Demo" title="See the drift on mission day 115" className="bg-space-900/40">
           <DemoPreview />
           <p className="mt-4 text-sm text-muted">
-            In the demo: slide through 180 simulated days, press play, tap the heart, read the four guidance layers and open the Emergency guide.
+            In the demo: slide through 180 simulated days, press play, tap the heart, read the four guidance layers, log today's measurements and open the Emergency guide.
           </p>
         </Section>
 

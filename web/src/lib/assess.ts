@@ -106,8 +106,13 @@ function thresholdReason(t: Threshold, status: Status): Reason {
   return { kind: "threshold", status, text: t.label, sources: t.sources };
 }
 
-export function assessChannel(def: IndicatorDef, ch: ChannelDef, day: number): ChannelAssessment {
-  const all = series(def.id, ch.key);
+/**
+ * `override` replaces the value of `day` (a measurement logged by the user);
+ * the previous days keep the simulated history.
+ */
+export function assessChannel(def: IndicatorDef, ch: ChannelDef, day: number, override?: number): ChannelAssessment {
+  const base = series(def.id, ch.key);
+  const all = override === undefined ? base : base.map((x, i) => (i === day - 1 ? override : x));
   const v = all[day - 1];
   const reasons: Reason[] = [];
   let status: Status = "normal";
@@ -173,9 +178,9 @@ export function assessChannel(def: IndicatorDef, ch: ChannelDef, day: number): C
 
 const dayCache = new Map<number, IndicatorAssessment[]>();
 
-export function assessIndicator(def: IndicatorDef, day: number): IndicatorAssessment {
+export function assessIndicator(def: IndicatorDef, day: number, overrides?: Partial<Record<string, number>>): IndicatorAssessment {
   const d = Math.min(MISSION_DAYS, Math.max(1, Math.round(day)));
-  const channels = def.channels.map((ch) => assessChannel(def, ch, d));
+  const channels = def.channels.map((ch) => assessChannel(def, ch, d, overrides?.[ch.key]));
   const status = channels.reduce<Status>((s, c) => worst(s, c.status), "normal");
   const reasons = channels.flatMap((c) => c.reasons);
   const outs = channels.filter((c) => c.daysOutOfBand >= 2);
@@ -205,6 +210,11 @@ export function assessDay(day: number): IndicatorAssessment[] {
   const res = INDICATORS.map((def) => assessIndicator(def, d));
   dayCache.set(d, res);
   return res;
+}
+
+/** Assess values logged by the user for `day` against the same rule (not cached). */
+export function assessEntry(id: IndicatorId, day: number, values: Partial<Record<string, number>>): IndicatorAssessment {
+  return assessIndicator(INDICATOR_BY_ID[id], day, values);
 }
 
 export function assessmentOf(id: IndicatorId, day: number): IndicatorAssessment {

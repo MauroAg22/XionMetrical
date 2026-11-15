@@ -13,7 +13,7 @@
 
 Halfway to Mars, a message to Earth takes up to 20 minutes each way, so astronauts carry much of the responsibility for spotting changes in their own health. XionMetrical gathers **10 health indicators** that cover NASA's **5 hazards of human spaceflight**, compares every value with the **astronaut's own baseline**, flags drift early and shows **what to do — with a source for every line**.
 
-The website has a landing page and an **interactive demo**: one example astronaut, 180 simulated days of a Mars transit, a clickable 2D body map, a traffic light, trend charts, 4-layer guidance and an Emergency guide.
+The website has a landing page and an **interactive demo**: one example astronaut, 180 simulated days of a Mars transit, a clickable 2D body map, a traffic light, trend charts, 4-layer guidance, an Emergency guide and a daily check-in (measurement reminders and a "Log today's measurements" form).
 
 ## How it works
 
@@ -25,6 +25,7 @@ The website has a landing page and an **interactive demo**: one example astronau
    A value can be *inside* the general adult range and still be yellow because it moved away from **your** baseline — that is the core idea.
 3. **Sourced guidance in 4 layers:** (a) status and why it matters, (b) what to do now, (c) when to escalate, (d) how to measure. Texts are fixed, written from the cited sources, and never generated inside the app. Where no countermeasure was published, the app says so and refers to the Crew Medical Officer. **No diagnosis, no medication, no doses.**
 4. **Emergency guide** (chest pain or collapse, the challenge video's scenario): 8 steps — act on board first, message Earth store-and-forward without waiting.
+5. **Daily check-in:** reminders follow a measurement routine (on waking, before sleep, weekly; radiation and CO₂ come from sensors), each with how to measure and its source; the schedule is an example for the prototype, not a clinical protocol. In *Log today's measurements* the astronaut types heart rate, sleep and mood, and the same rule checks them against the baseline. Nothing is stored or sent.
 
 ## The 10 indicators
 
@@ -81,7 +82,7 @@ Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_P
 | Path | What |
 |---|---|
 | `web/` | Next.js (App Router, TypeScript, Tailwind) static site: landing `/` and demo `/demo` |
-| `web/src/lib/` | Indicator catalogue, simulation, traffic-light rule, guidance texts and sources (pure TypeScript) |
+| `web/src/lib/` | Indicator catalogue, simulation, traffic-light rule, measurement routine, guidance texts and sources (pure TypeScript) |
 | `web/src/components/demo/` | Pure demo components (also reused by the video renderer) |
 | `video/` | 30-second video pipeline: vector animation rendered frame by frame with Playwright + Chrome, Piper narration, synthesized sound, ffmpeg |
 

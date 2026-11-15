@@ -1,7 +1,8 @@
 // Run: npm test (node --test, Node 24 type stripping; no test framework).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { activeAlerts, assessDay, assessmentOf, baselineBand, formatValue, zoneStatus } from "./assess.ts";
+import { activeAlerts, assessDay, assessEntry, assessmentOf, baselineBand, formatValue, zoneStatus } from "./assess.ts";
+import { ROUTINE, isDue, nextDue } from "./routine.ts";
 import { INDICATORS, INDICATOR_BY_ID, primaryChannel } from "./model.ts";
 import type { IndicatorId, Status } from "./model.ts";
 import { CO2_PEAK_DAYS, simulate } from "./simulate.ts";
@@ -76,4 +77,30 @@ test("published references used by the brief", () => {
   const s118 = simulate(118).strength.pct;
   assert.ok(Math.abs(s118 - 92) <= 1, `strength ≈ 92% at day 118 (${s118})`);
   assert.deepEqual(formatValue(INDICATOR_BY_ID.bp, 115), { value: "122/77", unit: "mmHg" });
+});
+
+test("logged measurements use the same rule (no change to the simulated history)", () => {
+  // Day 115: a logged 76 bpm continues the 3-day drift of the scenario.
+  assert.equal(assessEntry("hr", 115, { bpm: 76 }).headline, "Resting heart rate above your baseline · 3 days");
+  // Back inside the personal band → normal, even in the middle of the scenario.
+  assert.equal(assessEntry("hr", 115, { bpm: 62 }).status, "normal");
+  // Beyond the published limit → act now.
+  assert.equal(assessEntry("hr", 115, { bpm: 105 }).status, "alert");
+  // A single day outside the band is not enough to flag drift.
+  assert.equal(assessEntry("hr", 113, { bpm: 75 }).status, "normal");
+  assert.equal(assessEntry("sleep", 60, { h: 7 }).status, "normal");
+  assert.equal(assessEntry("mood", 115, { score: 3 }).status, "drift");
+  // The cached simulated assessment is untouched.
+  assert.equal(assessmentOf("hr", 115).channels[0].value, simulate(115).hr.bpm);
+  assert.equal(assessmentOf("hr", 115).status, "drift");
+});
+
+test("measurement routine covers the 10 indicators once", () => {
+  assert.deepEqual(ROUTINE.map((r) => r.id).sort(), INDICATORS.map((d) => d.id).sort());
+  const glucose = ROUTINE.find((r) => r.id === "glucose")!;
+  assert.equal(isDue(glucose, 115), false);
+  assert.equal(nextDue(glucose, 115), 119);
+  assert.equal(isDue(glucose, 119), true);
+  assert.equal(isDue(ROUTINE.find((r) => r.id === "co2")!, 115), false);
+  assert.deepEqual(ROUTINE.filter((r) => r.loggable).map((r) => r.id), ["hr", "sleep", "mood"]);
 });

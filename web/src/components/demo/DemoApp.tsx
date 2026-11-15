@@ -9,6 +9,7 @@ import { INDICATOR_BY_ID, MISSION_DAYS } from "@/lib/model";
 import type { IndicatorId, Status } from "@/lib/model";
 import { AlertCard } from "./AlertCard";
 import { BodyFigure } from "./BodyFigure";
+import { CheckIn } from "./CheckIn";
 import { EmergencyFlow } from "./EmergencyFlow";
 import { IndicatorList } from "./IndicatorList";
 import { IndicatorPanel } from "./IndicatorPanel";
@@ -51,6 +52,12 @@ export default function DemoApp() {
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       document.getElementById("indicator-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  }, []);
+
+  // From the check-in (below the panel): always bring the panel into view.
+  const openPanel = useCallback((id: IndicatorId) => {
+    setSelected(id);
+    document.getElementById("indicator-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   const counts = assessDay(day).reduce<Record<Status, number>>(
@@ -157,6 +164,12 @@ export default function DemoApp() {
                 {j.label}
               </button>
             ))}
+            <a
+              href="#check-in"
+              className="rounded-full border border-accent/60 px-3 py-1 text-xs text-accent-soft hover:border-accent-soft hover:text-ink"
+            >
+              Log today&apos;s measurements ↓
+            </a>
           </div>
         </section>
 
@@ -174,6 +187,8 @@ export default function DemoApp() {
             <IndicatorPanel id={selected} day={day} />
           </div>
         </div>
+
+        <CheckIn key={day} day={day} onSelect={openPanel} className="mt-4" />
       </main>
 
       <footer className="fixed inset-x-0 bottom-0 z-30 border-t border-space-700 bg-space-950/95 px-4 py-2 text-center text-xs text-muted backdrop-blur">
