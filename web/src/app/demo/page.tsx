@@ -1,8 +1,12 @@
-// Placeholder demo route (E0). The interactive demo is built in stage E2.
+import type { Metadata } from "next";
+import DemoApp from "@/components/demo/DemoApp";
+
+export const metadata: Metadata = {
+  title: "Interactive demo — XionMetrical",
+  description:
+    "Simulated 180-day Mars transit: 10 health indicators, personal baseline, traffic light, trends, sourced guidance and an emergency guide. Educational prototype, not a medical device.",
+};
+
 export default function DemoPage() {
-  return (
-    <main className="flex min-h-screen items-center justify-center px-4">
-      <p className="text-muted">Interactive demo — coming in stage E2.</p>
-    </main>
-  );
+  return <DemoApp />;
 }

@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath: basePath || undefined,
   images: { unoptimized: true },
+  // No floating dev badge (it would show up in video frames rendered from `next dev`).
+  devIndicators: false,
 };
 
 export default nextConfig;
