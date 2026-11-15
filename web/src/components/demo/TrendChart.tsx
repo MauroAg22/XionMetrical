@@ -160,7 +160,17 @@ export function TrendChart({ id, day, windowDays = 60, className = "" }: Props) 
       {/* today */}
       <line x1={x(day)} x2={x(day)} y1={M.t} y2={H - M.b} stroke="#e8eef9" strokeOpacity="0.35" />
       <circle cx={x(day)} cy={y(data[0].vals[data[0].vals.length - 1])} r="5" fill={STATUS_COLOR[assessmentOf(id, day).status]} stroke="#040914" strokeWidth="2" />
-      <text x={Math.min(x(day), W - M.r - 4)} y={M.t + 12} textAnchor="end" fontSize="11" fill="#e8eef9">
+      <text
+        x={x(day) - 9}
+        y={Math.max(M.t + 12, y(data[0].vals[data[0].vals.length - 1]) - 9)}
+        textAnchor="end"
+        fontSize="12"
+        fontWeight="600"
+        fill="#e8eef9"
+        paintOrder="stroke"
+        stroke="#071022"
+        strokeWidth="4"
+      >
         {`${fmt(data[0].vals[data[0].vals.length - 1], dec)} ${prim.unit}`}
       </text>
       {chans.length > 1 && (

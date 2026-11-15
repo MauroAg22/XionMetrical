@@ -19,3 +19,6 @@ video/.cache/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Herramientas locales de Claude Code (vista previa)
+.claude/
