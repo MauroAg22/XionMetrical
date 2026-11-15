@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { activeAlerts, assessDay, assessEntry, assessmentOf, baselineBand, formatValue, zoneStatus } from "./assess.ts";
 import { ROUTINE, isDue, nextDue } from "./routine.ts";
-import { INDICATORS, INDICATOR_BY_ID, primaryChannel } from "./model.ts";
+import { INDICATORS, INDICATOR_BY_ID, MISSION_DAYS, phaseOf, primaryChannel } from "./model.ts";
 import type { IndicatorId, Status } from "./model.ts";
 import { CO2_PEAK_DAYS, simulate } from "./simulate.ts";
 
@@ -11,10 +11,21 @@ const SCENARIO_IDS: IndicatorId[] = ["hr", "bp", "sleep", "mood"];
 const statusMap = (day: number): Record<string, Status> =>
   Object.fromEntries(assessDay(day).map((a) => [a.id, a.status]));
 
-test("simulate() is deterministic and covers 180 days", () => {
+test("simulate() is deterministic and covers the whole mission", () => {
   assert.deepEqual(simulate(57), simulate(57));
   assert.ok(simulate(180).radiation.msv > simulate(1).radiation.msv);
-  assert.deepEqual(simulate(999), simulate(180));
+  assert.deepEqual(simulate(5000), simulate(MISSION_DAYS));
+});
+
+test("days 1–180 are unchanged since the 180-day version (the video uses them)", () => {
+  // FNV-1a fingerprint of the JSON of days 1–180, taken from commit 18215a2.
+  const json = JSON.stringify(Array.from({ length: 180 }, (_, i) => simulate(i + 1)));
+  let h = 0x811c9dc5;
+  for (let i = 0; i < json.length; i++) {
+    h ^= json.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  assert.equal(h.toString(16), "5b1c7b51");
 });
 
 test("baseline (days 1–30) is close to the brief's suggested values", () => {
@@ -61,11 +72,13 @@ test("day 118 (video collapse day): still drifting, 6 days", () => {
   for (const id of SCENARIO_IDS) assert.equal(statusMap(118)[id], "drift");
 });
 
-test("no false alarms: only the scenario days and the CO₂ night pockets", () => {
-  for (let day = 1; day <= 180; day++) {
+test("no false alarms in 1080 days: only the scenario, the CO₂ pockets and the dose limits", () => {
+  for (let day = 1; day <= MISSION_DAYS; day++) {
     if (day >= 113 && day <= 119) continue;
+    const dose = simulate(day).radiation.msv;
     for (const a of assessDay(day)) {
-      const expected = a.id === "co2" && CO2_PEAK_DAYS[day] ? "drift" : "normal";
+      let expected: Status = a.id === "co2" && CO2_PEAK_DAYS[day] ? "drift" : "normal";
+      if (a.id === "radiation") expected = dose >= 600 ? "alert" : dose >= 540 ? "drift" : "normal";
       assert.equal(a.status, expected, `day ${day} ${a.id}: ${a.reasons.map((r) => r.text).join("; ")}`);
     }
   }
@@ -103,4 +116,21 @@ test("measurement routine covers the 10 indicators once", () => {
   assert.equal(isDue(glucose, 119), true);
   assert.equal(isDue(ROUTINE.find((r) => r.id === "co2")!, 115), false);
   assert.deepEqual(ROUTINE.filter((r) => r.loggable).map((r) => r.id), ["hr", "sleep", "mood"]);
+});
+
+test("full mission (D24): phases and radiation by phase", () => {
+  assert.equal(MISSION_DAYS, 1080);
+  assert.deepEqual([1, 180, 181, 900, 901, 1080].map((d) => phaseOf(d).id), ["outbound", "outbound", "surface", "surface", "return", "return"]);
+  const dose = (d: number) => simulate(d).radiation.msv;
+  // ≈ 0.67 mSv/day on the surface (Curiosity RAD) and ≈ 1.5 mSv/day in transit.
+  assert.ok(Math.abs((dose(900) - dose(180)) / 720 - 0.67) < 0.02, `surface rate ${(dose(900) - dose(180)) / 720}`);
+  assert.ok(Math.abs((dose(1080) - dose(900)) / 180 - 1.5) < 0.05);
+  // NASA: a round trip "on the order of 1,000 mSv".
+  assert.ok(dose(1080) > 950 && dose(1080) < 1100, `total ${dose(1080)}`);
+  // The 600 mSv career limit is crossed while on Mars → red, with sourced guidance.
+  let first = 0;
+  for (let d = 1; d <= MISSION_DAYS && !first; d++) if (assessmentOf("radiation", d).status === "alert") first = d;
+  assert.equal(phaseOf(first).id, "surface");
+  assert.ok(first > 640 && first < 710, `first red day ${first}`);
+  assert.equal(activeAlerts(1080)[0].id, "radiation");
 });

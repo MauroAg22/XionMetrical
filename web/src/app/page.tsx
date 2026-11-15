@@ -222,7 +222,7 @@ export default function Home() {
         <Section id="demo" eyebrow="Demo" title="See the drift on mission day 115" className="bg-space-900/40">
           <DemoPreview />
           <p className="mt-4 text-sm text-muted">
-            In the demo: slide through 180 simulated days, press play, tap the heart, read the four guidance layers, log today's measurements and open the Emergency guide.
+            In the demo: slide through a simulated 1,080-day mission (to Mars, 720 days on the surface and back), press play, tap the heart, read the four guidance layers, log today's measurements and open the Emergency guide.
           </p>
         </Section>
 
@@ -241,8 +241,9 @@ export default function Home() {
         {/* 7. NASA data & references */}
         <Section id="references" eyebrow="NASA data & references" title="Where every number and every tip comes from" className="bg-space-900/40">
           <p className="max-w-3xl text-muted">
-            The demo uses <strong className="text-ink">simulated data</strong> for one example astronaut on a 180-day Mars transit, calibrated with
-            values published by NASA (for example, about 1.5 mSv per day of radiation in NASA&apos;s Mars-transit example, 3,035 kcal per day of food and a
+            The demo uses <strong className="text-ink">simulated data</strong> for one example astronaut on a 1,080-day Mars mission (180 days out, 720 on the surface, 180 back),
+            calibrated with values published by NASA (for example, about 1.5 mSv per day of radiation in NASA&apos;s Mars-transit example, about
+            0.67 mSv per day measured by Curiosity on the surface of Mars, 3,035 kcal per day of food and a
             CO₂ limit of 3 mmHg as a 1-hour average). No real astronaut data is used.
           </p>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -318,7 +319,7 @@ export default function Home() {
             <div className="rounded-2xl border border-space-700 bg-space-900/80 p-5">
               <h3 className="font-semibold text-ink">Team decisions</h3>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted">
-                <li>The idea — an early warning against each astronaut&apos;s own baseline on a Mars transit — the name and the slogan are the team&apos;s.</li>
+                <li>The idea — an early warning against each astronaut&apos;s own baseline on a Mars mission — the name and the slogan are the team&apos;s.</li>
                 <li>The team chose the scenario, the 10 indicators, the simulated-data approach, the 4-layer guidance and the video concept; every AI proposal and its outcome is logged in our declarations registry.</li>
                 <li>The app contains no AI: guidance is fixed, sourced text that works offline.</li>
                 <li>No NASA branding was generated or modified with AI.</li>

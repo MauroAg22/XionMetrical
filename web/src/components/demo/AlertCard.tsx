@@ -38,7 +38,7 @@ export function AlertCard({ day, onSelect, className = "" }: Props) {
   const n = alerts.length;
   const title =
     worst === "alert"
-      ? `Act now · ${n} indicator${n > 1 ? "s" : ""} need attention`
+      ? `Act now · ${n} indicator${n > 1 ? "s need" : " needs"} attention`
       : `Early warning · ${n} indicator${n > 1 ? "s" : ""} drifting from your baseline`;
   return (
     <section

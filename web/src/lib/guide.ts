@@ -152,10 +152,15 @@ export const GUIDE: Record<IndicatorId, Guide> = {
     why: [
       { text: "Beyond Earth's protection, crews receive space radiation every day. NASA keeps a career below 600 mSv to hold the added risk of cancer death under 3%.", sources: ["F-N15", "F-N02-radiation"] },
       { text: "NASA's design brief uses about 1.5 mSv per day as a Mars-transit example.", sources: ["F-N16"] },
+      { text: "On the surface of Mars, Curiosity's radiation detector measured about 0.67 mSv per day; with the cruise data, NASA projected a round trip on the order of 1,000 mSv.", sources: ["F-N18"] },
     ],
     now: {
       normal: [{ text: "Keep your personal dosimeter with you; NASA and the CSA monitor crew dose.", sources: ["F-N09", "F-C01"] }],
       drift: [{ text: "Follow shielding and operational procedures: NASA's countermeasures are shielding, monitoring and operations.", sources: ["F-N05", "F-N02-radiation"] }],
+      alert: [
+        { text: "You are at or above NASA's 600 mSv career limit: tell the Crew Medical Officer and send a store-and-forward note to the flight surgeon.", sources: ["F-N15", "XM-RULE"] },
+        { text: "Keep following shielding and operational procedures: NASA's countermeasures are shielding, monitoring and operations.", sources: ["F-N05", "F-N02-radiation"] },
+      ],
     },
     escalate: [
       { text: "Solar particle event alert → go to the shelter built with the vehicle's stowage and materials, such as water.", sources: ["F-N05", "F-N16"] },

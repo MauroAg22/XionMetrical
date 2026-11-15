@@ -196,7 +196,7 @@ export const INDICATORS: IndicatorDef[] = [
     zone: "body",
     format: "single",
     referenceKind: "nasa",
-    reference: { text: "Career limit: below 600 mSv effective dose [V1 4030]; below 250 mSv per solar particle event [V1 4031]. NASA's own Mars-transit example uses about 1.5 mSv per day.", sources: ["F-N15", "F-N16"] },
+    reference: { text: "Career limit: below 600 mSv effective dose [V1 4030]; below 250 mSv per solar particle event [V1 4031]. NASA's own Mars-transit example uses about 1.5 mSv per day; on the surface of Mars, Curiosity measured about 0.67 mSv per day.", sources: ["F-N15", "F-N16", "F-N18"] },
     channels: [
       {
         key: "msv", label: "Cumulative dose", unit: "mSv", decimals: 1, primary: true,
@@ -274,7 +274,25 @@ export const INDICATOR_BY_ID: Record<IndicatorId, IndicatorDef> = Object.fromEnt
   INDICATORS.map((d) => [d.id, d]),
 ) as Record<IndicatorId, IndicatorDef>;
 
-export const MISSION_DAYS = 180;
+/** Full simulated Mars mission (decision D24): 180 days out, 720 on the surface, 180 back. */
+export const MISSION_DAYS = 1080;
+
+export type PhaseId = "outbound" | "surface" | "return";
+export interface Phase {
+  id: PhaseId;
+  name: string;
+  short: string;
+  start: number;
+  end: number;
+}
+export const PHASES: Phase[] = [
+  { id: "outbound", name: "Transit to Mars", short: "To Mars", start: 1, end: 180 },
+  { id: "surface", name: "Mars surface stay", short: "On Mars", start: 181, end: 900 },
+  { id: "return", name: "Return to Earth", short: "To Earth", start: 901, end: 1080 },
+];
+export function phaseOf(day: number): Phase {
+  return PHASES.find((p) => day <= p.end) ?? PHASES[PHASES.length - 1];
+}
 export const BASELINE_DAYS = 30;
 export const BAND_K = 1.5;
 

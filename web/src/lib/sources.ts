@@ -6,7 +6,7 @@ export type SourceId =
   | "F-N01" | "F-N02" | "F-N03" | "F-N05" | "F-N06" | "F-N07" | "F-N09" | "F-N12"
   | "F-N02-cardio" | "F-N02-behavior" | "F-N02-sleep" | "F-N02-radiation"
   | "F-N02-food" | "F-N02-fitness" | "F-N02-bone" | "F-N03-food"
-  | "F-N14" | "F-N15" | "F-N16" | "F-N17"
+  | "F-N14" | "F-N15" | "F-N16" | "F-N17" | "F-N18"
   | "F-C01" | "F-C02"
   | "F-G01" | "F-G02" | "F-G03" | "F-G04"
   | "F-M01" | "F-M02" | "F-M03"
@@ -42,6 +42,7 @@ const list: Source[] = [
   { id: "F-N15", org: "NASA", short: "NASA-STD-3001 Vol. 1", title: "NASA-STD-3001 Volume 1, Crew Health, Revision C (2023)", url: "https://standards.nasa.gov/sites/default/files/standards/NASA/C//nasa-std-3001-vol-1-rev-c-signature.pdf", nasa: true },
   { id: "F-N16", org: "NASA OCHMO", short: "NASA OCHMO-TB-020", title: "OCHMO Technical Brief: Design for Ionizing Radiation Protection (OCHMO-TB-020, Rev E)", url: "https://www.nasa.gov/wp-content/uploads/2023/03/radiation-protection-technical-brief-ochmo.pdf", nasa: true },
   { id: "F-N17", org: "NASA OCHMO", short: "NASA OCHMO-TB-013", title: "OCHMO Technical Brief: Food and Nutrition (OCHMO-TB-013)", url: "https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-013-food-and-nutrition.pdf", nasa: true },
+  { id: "F-N18", org: "NASA", short: "NASA · Curiosity RAD", title: "NASA Rover Results Include First Age Measurement on Mars and Help for Human Exploration (release 13-366, 2013): radiation on the surface of Mars", url: "https://www.nasa.gov/news-release/nasa-rover-results-include-first-age-measurement-on-mars-and-help-for-human-exploration/", nasa: true },
   { id: "F-C01", org: "Canadian Space Agency", short: "CSA · Radiation monitoring", title: "Monitoring radiation for astronaut health (2026)", url: "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp", nasa: false },
   { id: "F-C02", org: "Canadian Space Agency", short: "CSA · Science in space", title: "Why do we conduct science experiments in space?", url: "https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp", nasa: false },
   { id: "F-G01", org: "MedlinePlus (NIH)", short: "MedlinePlus · Pulse", title: "Pulse", url: "https://medlineplus.gov/ency/article/003399.htm", nasa: false },
