@@ -3,7 +3,7 @@
 // Written by hand from docs/base-conocimiento/11, 12 and 13 — each line cites
 // its source. Rules: no diagnosis, no medication or doses, nothing invented;
 // where no countermeasure was published we say so and refer to the Crew
-// Medical Officer (CMO). Educational prototype, not a medical device.
+// Medical Officer (CMO). Prototype, not a medical device.
 import type { IndicatorId, Status } from "./model.ts";
 import type { SourceId } from "./sources.ts";
 

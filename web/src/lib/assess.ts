@@ -7,7 +7,7 @@
 //  • Red    "Act now"  — beyond a published limit (NASA or general health).
 // A value can be inside the general range and still be yellow because it
 // drifted from YOUR baseline: that is the core idea of XionMetrical.
-// Educational prototype: this is not a diagnosis.
+// Prototype: this is not a diagnosis.
 import { BAND_K, BASELINE_DAYS, INDICATORS, INDICATOR_BY_ID, MISSION_DAYS, primaryChannel } from "./model.ts";
 import type { ChannelDef, IndicatorDef, IndicatorId, Status, Threshold, ZoneId } from "./model.ts";
 import { series, simulate } from "./simulate.ts";

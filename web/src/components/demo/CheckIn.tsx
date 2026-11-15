@@ -2,7 +2,7 @@
 // Today's check-in: measurement reminders (routine.ts) and the
 // "Log today's measurements" form (decision D7: manual entry + simulated data).
 // Logged values are compared with the same traffic-light rule as the simulated
-// data; nothing is stored or sent. Educational prototype, not a diagnosis.
+// data; nothing is stored or sent. Prototype, not a diagnosis.
 import { useId, useState } from "react";
 import type { FormEvent } from "react";
 import { assessDay, assessEntry, fmt } from "@/lib/assess";
@@ -115,7 +115,7 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
         <h2 id={`${uid}-title`} className="text-lg font-bold text-ink">
           Today&apos;s check-in · mission day <span className="font-mono">{day}</span>
         </h2>
-        <p className="text-xs text-muted">Reminders and manual entry · educational, not a diagnosis</p>
+        <p className="text-xs text-muted">Reminders and manual entry · not a diagnosis</p>
       </div>
 
       <div className="mt-3 grid gap-4 lg:grid-cols-2">
@@ -321,7 +321,7 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
               </ul>
             ) : null}
           </div>
-          <p className="mt-3 text-[11px] text-faint">Nothing you type is stored or sent. Educational prototype — not a medical device.</p>
+          <p className="mt-3 text-[11px] text-faint">Nothing you type is stored or sent. Prototype — not a medical device.</p>
         </div>
       </div>
     </section>

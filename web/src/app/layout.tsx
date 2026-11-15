@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "XionMetrical — Precision bio-telemetry for deep space missions",
   description:
-    "Educational prototype for the 2026 NASA Space Apps Challenge: astronaut health monitoring for a Mars mission, built around each astronaut's personal baseline. Simulated data · not a medical device · built with AI assistance (declared).",
+    "Prototype for the 2026 NASA Space Apps Challenge: astronaut health monitoring for a Mars mission, built around each astronaut's personal baseline. Simulated data · not a medical device · built with AI assistance (declared).",
   generator: "Next.js (static export) · code written with AI assistance (Claude Code), reviewed by Team Space Mercedes",
 };
 

@@ -181,7 +181,7 @@ export function GuideLayers({ id, day, className = "" }: { id: IndicatorId; day:
         ))}
       </ol>
       <p className="mt-2 text-[11px] text-faint">
-        Educational prototype, not a medical device: no diagnosis, no medication. Guidance written by the team from the cited sources; XionMetrical rule = our own traffic-light design.
+        Prototype, not a medical device: no diagnosis, no medication. Guidance written by the team from the cited sources; XionMetrical rule = our own traffic-light design.
       </p>
     </section>
   );

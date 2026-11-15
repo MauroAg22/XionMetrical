@@ -1,7 +1,7 @@
 // XionMetrical — indicator catalogue (10 indicators, 5 hazards).
 // Reference values come from docs/PROYECTO-BASE.md §4.2 (decision D14) and
-// docs/base-conocimiento/11-12. Nothing here is a diagnosis: it is an
-// educational prototype that compares each value with the astronaut's own
+// docs/base-conocimiento/11-12. Nothing here is a diagnosis: it is a
+// prototype that compares each value with the astronaut's own
 // baseline, then with a published limit (NASA or general health) and cites it.
 import type { SourceId } from "./sources.ts";
 

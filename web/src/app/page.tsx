@@ -366,7 +366,7 @@ export default function Home() {
       {/* 10. Footer */}
       <footer className="border-t border-space-800 bg-space-950 py-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>Educational prototype · simulated data · not a medical device</p>
+          <p>Prototype · simulated data · not a medical device</p>
           <p>
             Created for the 2026 NASA Space Apps Challenge ·{" "}
             <a href={REPO_URL} target="_blank" rel="noreferrer" className="text-accent-soft hover:text-ink">

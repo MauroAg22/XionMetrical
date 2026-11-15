@@ -2,7 +2,7 @@
 
 *Precision bio-telemetry for deep space missions.*
 
-> **Educational prototype · simulated data · not a medical device.**
+> **Prototype · simulated data · not a medical device.**
 > Built by **Team Space Mercedes** for the **2026 NASA Space Apps Challenge** — challenge *Create Health Monitoring Software for Astronauts on Space Missions*.
 > Code and texts were produced **with AI assistance** (declared below, in [AI usage](#ai-usage-si)).
 

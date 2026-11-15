@@ -230,7 +230,7 @@ export default function DemoApp() {
       </main>
 
       <footer className="fixed inset-x-0 bottom-0 z-30 border-t border-space-700 bg-space-950/95 px-4 py-2 text-center text-xs text-muted backdrop-blur">
-        Prototype · simulated data · educational, not a medical device
+        Prototype · simulated data · not a medical device
       </footer>
 
       <EmergencyFlow open={emergency} onClose={() => setEmergency(false)} activeStep={step} onStep={setStep} />

@@ -87,7 +87,7 @@ execFileSync(
     "-metadata", "title=XionMetrical demo",
     "-metadata", "artist=Team Space Mercedes",
     "-metadata", `comment=${META}`,
-    "-metadata", `description=${META}. Educational prototype with simulated data; not a medical device.`,
+    "-metadata", `description=${META}. Prototype with simulated data; not a medical device.`,
     "-shortest", out,
   ],
   { stdio: "inherit" },
