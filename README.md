@@ -7,7 +7,7 @@
 > Code and texts were produced **with AI assistance** (declared below, in [AI usage](#ai-usage-si)).
 
 - **Website and interactive demo:** https://mauroag22.github.io/XionMetrical/ · demo: https://mauroag22.github.io/XionMetrical/demo/
-- **Video (≤ 30 s):** link added with the submission.
+- **Video (≤ 30 s):** [`out/xionmetrical-demo.mp4`](out/xionmetrical-demo.mp4) — 29.5 s, 1920×1080, English narration (AI voice and AI-assisted animation, declared in [AI usage](#ai-usage-si)).
 
 ## What it is
 

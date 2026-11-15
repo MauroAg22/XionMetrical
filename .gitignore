@@ -7,9 +7,10 @@ web/out/
 web/next-env.d.ts
 *.tsbuildinfo
 
-# Video: herramientas locales (Piper, voces), fotogramas y temporales; salida
-# final (MP4 y SRT en out/): se sube aparte con enlace público
-/out/
+# Video: herramientas locales (Piper, voces), fotogramas y temporales. De out/
+# solo se publica el video final; copias y subtítulos quedan locales
+/out/*
+!/out/xionmetrical-demo.mp4
 video/tools/
 video/frames/
 video/tmp/
