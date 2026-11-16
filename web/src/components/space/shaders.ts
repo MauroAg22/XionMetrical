@@ -174,7 +174,7 @@ void main() {
   float glow = band * (0.25 + clouds * clouds * 1.1) * (0.45 + 0.85 * c * c) * (0.7 + 0.6 * fine);
   glow *= 1.0 - 0.7 * lane;
   vec3 tint = mix(vec3(0.52, 0.60, 0.82), vec3(0.88, 0.80, 0.68), c * c);
-  gl_FragColor = vec4(uBase + tint * glow * 0.12 * uFade, 1.0);
+  gl_FragColor = vec4(uBase + tint * glow * 0.2 * uFade, 1.0);
 }
 `;
 

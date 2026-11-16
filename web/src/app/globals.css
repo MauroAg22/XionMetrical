@@ -283,7 +283,7 @@ html[data-space="3d"] .static-planet {
   height: 1px;
   min-width: 3rem;
   flex: 1 1 auto;
-  background: var(--color-space-600);
+  background: rgb(141 184 255 / 0.28);
   transform-origin: left center;
   animation: hud-draw 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -316,11 +316,32 @@ html[data-space="3d"] .static-planet {
   color: var(--color-faint);
 }
 @media (max-width: 639px) {
-  .hud-phase {
+  .hud-phase,
+  .hud-end {
     display: none;
   }
   .hud-read {
     gap: 0.6rem;
+    margin-left: 0.2rem;
+  }
+  /* Earth and Mars as dots at the ends of the track. */
+  .hud-track::before,
+  .hud-track::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  .hud-track::before {
+    left: -2px;
+    background: #6fa0e8;
+  }
+  .hud-track::after {
+    right: -2px;
+    background: #b87a52;
   }
 }
 @keyframes hud-draw {

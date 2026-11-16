@@ -16,8 +16,9 @@ const BASE = v3(4 / 255, 9 / 255, 20 / 255); // #040914, the page background
 const EARTH_TILT = (23.4 * Math.PI) / 180;
 const MARS = v3(40, 4, -22);
 const MARS_R = 0.53;
-const GAL_N = v3(-0.5, 0.72, 0.48).normalize();
-const GAL_C = v3(0.62, 0.62, -0.3).projectOnPlane(GAL_N).normalize();
+// Milky Way plane chosen so the band (and its brighter core) crosses the view during the cruise.
+const GAL_N = v3(0.806, -0.403, 0.434).normalize();
+const GAL_C = v3(0.38, -0.21, -0.9).projectOnPlane(GAL_N).normalize();
 
 // Transfer trajectory: leaves Earth, arcs "up" and away, and reaches Mars from the camera side.
 const PATH = new THREE.CatmullRomCurve3(
@@ -64,11 +65,11 @@ const LATE = nearMars(58, 3.6, 1.2, 1.1);
 const KEYS: Key[] = [
   { day: 1, pos: HERO.pos, at: HERO.at, atP: HERO_P.at },
   { day: 20, pos: v3(-1.4, 2.3, 4.8), at: v3(-2.2, 0.9, 0), atP: v3(-0.4, 0.5, 0) },
-  { day: 45, pos: v3(2.5, 4.6, 11), at: v3(8.5, 3, -4), atP: v3(6, 2.6, -4) },
-  { day: 75, pos: v3(12, 10, 12), at: v3(21, 5, -9), atP: v3(17, 4.6, -8) },
-  { day: 115, pos: v3(24, 9.5, 8), at: v3(35.5, 4.8, -17), atP: v3(33, 5, -16) },
-  { day: 140, pos: v3(32.5, 7.6, -3), at: v3(39, 4.4, -20.5), atP: v3(38.6, 4.4, -20.6) },
-  { day: 160, pos: v3(37, 5.8, -13.5), at: v3(39.3, 4.2, -21.6), atP: v3(39.6, 4.1, -21.8) },
+  { day: 45, pos: v3(1, 17, 27), at: v3(12, 2.5, -7), atP: v3(10, 2.5, -6) },
+  { day: 75, pos: v3(7, 27, 34), at: v3(19, 3, -11), atP: v3(20, 3, -11) },
+  { day: 115, pos: v3(21, 19, 21), at: v3(32, 4, -16), atP: v3(34, 4, -18) },
+  { day: 140, pos: v3(30, 11, 6), at: v3(37.5, 4.2, -19), atP: v3(38.5, 4.2, -20.5) },
+  { day: 160, pos: v3(35.5, 6.4, -10), at: v3(39.1, 4.2, -21.3), atP: v3(39.6, 4.1, -21.8) },
   { day: ARRIVAL_DAY, pos: ARRIVE.pos, at: ARRIVE.at, atP: ARRIVE.atP },
   { day: 300, pos: STAY.pos, at: STAY.at, atP: STAY.atP },
   { day: 409, pos: LATE.pos, at: LATE.at, atP: LATE.atP },
@@ -110,7 +111,7 @@ function makeStars(count: number) {
     if (rnd() > 0.32 + 0.68 * Math.exp(-(b * b) / 0.03)) continue; // denser along the Milky Way
     pos.set([x * 50, y * 50, z * 50], i * 3);
     const m = Math.pow(rnd(), 7);
-    size[i] = 1.3 + m * 2.8;
+    size[i] = 1.4 + m * 3;
     bright[i] = Math.min(1.2, 0.22 + 0.7 * Math.pow(rnd(), 2.4) + m * 0.7);
     delay[i] = rnd() * 0.9;
     const w = rnd();
@@ -144,7 +145,7 @@ function useWorld(mobile: boolean, pixelRatio: number) {
 
     const ignite = { value: 0 };
     const stars = new THREE.Points(
-      makeStars(mobile ? 1800 : 3200),
+      makeStars(mobile ? 2400 : 4600),
       shader(GLSL.STAR_VERT, GLSL.STAR_FRAG, { uIgnite: ignite, uPixelRatio: { value: pixelRatio } }, {
         blending: THREE.AdditiveBlending,
         depthWrite: false,
@@ -248,7 +249,8 @@ function Rig({ intro, onReady }: { intro: boolean; onReady: () => void }) {
   useFrame(() => {
     const s = state.current;
     const now = performance.now();
-    const dt = s.last ? Math.min((now - s.last) / 1000, 1 / 30) : 1 / 60;
+    // Frame-rate independent smoothing (also catches up quickly on slow devices).
+    const dt = s.last ? Math.min((now - s.last) / 1000, 0.25) : 1 / 60;
     s.last = now;
     if (s.start < 0) s.start = now;
     const k = intro ? Math.min(1, (now - s.start) / 3000) : 1;
