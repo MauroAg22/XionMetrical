@@ -79,7 +79,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
             Chest pain or collapse
           </h2>
           <p className="mt-1 text-sm text-muted">
-            Act on board now — Earth is up to 20 minutes away, one way. This guide does not replace crew medical training. No medication
+            Act on board now — a message to Earth can take up to 20 minutes to arrive. This guide does not replace crew medical training. No medication
             advice: the Crew Medical Officer (CMO) and the flight surgeon decide.
           </p>
         </div>

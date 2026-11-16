@@ -160,7 +160,7 @@ export function GuideLayers({ id, day, className = "" }: { id: IndicatorId; day:
       body: (
         <>
           <Lines lines={g.escalate} />
-          <p className="mt-2 text-xs text-muted">Earth is up to 20 minutes away, one way: act on board first, then report.</p>
+          <p className="mt-2 text-xs text-muted">A message to Earth can take up to 20 minutes to arrive: act on board first, then report.</p>
         </>
       ),
     },

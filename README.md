@@ -11,7 +11,7 @@
 
 ## What it is
 
-Halfway to Mars, a message to Earth takes up to 20 minutes each way, so astronauts carry much of the responsibility for spotting changes in their own health. XionMetrical gathers **10 health indicators** that cover NASA's **5 hazards of human spaceflight**, compares every value with the **astronaut's own baseline**, flags drift early and shows **what to do — with a source for every line**.
+On a Mars mission, a message to Earth takes up to 20 minutes each way, so astronauts carry much of the responsibility for spotting changes in their own health. XionMetrical gathers **10 health indicators** that cover NASA's **5 hazards of human spaceflight**, compares every value with the **astronaut's own baseline**, flags drift early and shows **what to do — with a source for every line**.
 
 The website has a landing page and an **interactive demo**: one example astronaut on a simulated 1,080-day Mars mission (180 days out, 720 on the surface, 180 back), a clickable 2D body map, a traffic light, trend charts, 4-layer guidance, an Emergency guide and a daily check-in (measurement reminders and a "Log today's measurements" form).
 

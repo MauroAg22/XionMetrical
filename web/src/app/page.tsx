@@ -108,7 +108,7 @@ export default function Home() {
               </h1>
               <p className="mt-4 font-display text-xl text-accent-soft sm:text-[1.7rem]">Precision bio-telemetry for deep space missions.</p>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-                Halfway to Mars, Earth is up to 20 minutes away. XionMetrical compares each astronaut with their own baseline, flags drift early
+                On a Mars mission, a message to Earth can take up to 20 minutes to arrive. XionMetrical compares each astronaut with their own baseline, flags drift early
                 and shows what to do — with a source for every line of guidance.
               </p>
               <p className="mt-6 inline-flex items-center gap-2 rounded-[2px] border border-space-600 bg-space-950/80 px-3 py-1.5 text-xs font-medium text-muted [text-shadow:none]">
@@ -137,7 +137,7 @@ export default function Home() {
         <Section id="problem" eyebrow="The problem" title="On the way to Mars, you are your own first responder">
           <div className="panel ticks">
             <p className={`${CELL} max-w-4xl text-lg leading-relaxed text-muted`}>
-              On a Mars transit a message to Earth takes up to 20 minutes each way, so astronauts carry much of the responsibility for spotting
+              On a Mars mission a message to Earth takes up to 20 minutes each way, so astronauts carry much of the responsibility for spotting
               changes in their own health. NASA&apos;s Human Research Program groups what drives those changes into five hazards — and XionMetrical
               watches at least one indicator for each.
             </p>
