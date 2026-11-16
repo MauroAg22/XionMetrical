@@ -7,8 +7,8 @@ import { TrendChart } from "@/components/demo/TrendChart";
 
 export function HeroPreview() {
   return (
-    <div className="relative rounded-3xl border border-space-700 bg-space-900/80 p-3 shadow-[0_30px_80px_-30px_rgba(76,141,255,0.45)]">
-      <div className="flex items-center justify-between px-2 pt-1 text-[11px] text-muted">
+    <div className="panel ticks p-3">
+      <div className="flex items-center justify-between gap-3 px-2 pb-2 pt-1 font-display text-xs text-muted">
         <span>Mission day 115 · Mars transit</span>
         <span>Prototype · simulated data</span>
       </div>

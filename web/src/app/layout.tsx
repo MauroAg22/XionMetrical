@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-space-950 text-ink antialiased">{children}</body>
+      <body className="min-h-screen text-ink antialiased">{children}</body>
     </html>
   );
 }

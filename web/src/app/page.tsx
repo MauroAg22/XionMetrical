@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { DemoPreview, HeroPreview } from "@/components/landing/DemoPreview";
+import { SpaceBackdrop } from "@/components/space/SpaceBackdrop";
+import { StaticEarth } from "@/components/space/StaticBackdrop";
 import { HAZARDS, INDICATORS } from "@/lib/model";
 import type { HazardId } from "@/lib/model";
 import { SOURCE_LIST } from "@/lib/sources";
@@ -52,10 +54,14 @@ export default function Home() {
   const otherSources = SOURCE_LIST.filter((s) => !s.nasa && s.url);
 
   return (
-    <div className="starfield min-h-screen">
-      <header className="sticky top-0 z-40 border-b border-space-800 bg-space-950/85 backdrop-blur">
+    <div className="min-h-screen">
+      <a href="#top" className="skip-link">
+        Skip to content
+      </a>
+      <SpaceBackdrop />
+      <header className="sticky top-0 z-40 border-b border-hairline bg-space-950/90">
         <nav aria-label="Main" className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <a href="#top" className="text-lg font-bold tracking-tight text-ink">
+          <a href="#top" className="font-display text-xl font-semibold tracking-tight text-ink">
             XionMetrical
           </a>
           <ul className="hidden items-center gap-5 text-sm text-muted lg:flex">
@@ -67,37 +73,46 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <Link href="/demo/" className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-space-950 hover:brightness-110">
+          <Link href="/demo/" className="btn-primary px-4 py-2 text-sm">
             Try the demo
           </Link>
         </nav>
       </header>
 
-      <main id="top">
-        {/* 1. Hero */}
-        <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-10 pt-12 sm:pt-16 lg:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-soft">2026 NASA Space Apps Challenge · Astronaut health monitoring</p>
-            <h1 className="mt-3 text-5xl font-extrabold tracking-tight text-ink sm:text-6xl">XionMetrical</h1>
-            <p className="mt-3 text-xl text-accent-soft sm:text-2xl">Precision bio-telemetry for deep space missions.</p>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Halfway to Mars, Earth is up to 20 minutes away. XionMetrical compares each astronaut with their own baseline, flags drift early
-              and shows what to do — with a source for every line of guidance.
-            </p>
-            <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-space-600 bg-space-900 px-3 py-1 text-xs font-medium text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-              Prototype · simulated data · not a medical device
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/demo/" className="rounded-xl bg-accent px-6 py-3 font-semibold text-space-950 hover:brightness-110">
-                Try the demo
-              </Link>
-              <a href="#how" className="rounded-xl border border-space-600 px-6 py-3 font-semibold text-ink hover:bg-space-850">
-                How it works
-              </a>
+      <main id="top" tabIndex={-1} className="outline-none">
+        {/* 1. Hero: the journey starts at Earth (the 3D scene shows its limb at the bottom). */}
+        <section aria-labelledby="hero-title" className="relative isolate overflow-hidden">
+          <div className="mx-auto grid min-h-[calc(100svh-4rem)] max-w-6xl items-center gap-10 px-4 pb-32 pt-12 sm:pt-16 lg:grid-cols-[1.12fr_0.88fr] lg:pb-40">
+            <div className="scene-text">
+              <p className="label">2026 NASA Space Apps Challenge · Astronaut health monitoring</p>
+              <h1 id="hero-title" className="mt-4 font-display text-[clamp(3.25rem,10.5vw,7.25rem)] font-bold leading-[0.92] tracking-[-0.01em] text-ink">
+                XionMetrical
+              </h1>
+              <p className="mt-4 font-display text-xl text-accent-soft sm:text-[1.7rem]">Precision bio-telemetry for deep space missions.</p>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+                Halfway to Mars, Earth is up to 20 minutes away. XionMetrical compares each astronaut with their own baseline, flags drift early
+                and shows what to do — with a source for every line of guidance.
+              </p>
+              <p className="mt-6 inline-flex items-center gap-2 rounded-[2px] border border-space-600 bg-space-950/80 px-3 py-1.5 text-xs font-medium text-muted [text-shadow:none]">
+                <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" className="shrink-0">
+                  <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                  <rect x="7.25" y="6.8" width="1.5" height="5" rx="0.75" fill="currentColor" />
+                  <circle cx="8" cy="4.6" r="0.95" fill="currentColor" />
+                </svg>
+                Prototype · simulated data · not a medical device
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3 [text-shadow:none]">
+                <Link href="/demo/" className="btn-primary px-6 py-3">
+                  Try the demo
+                </Link>
+                <a href="#how" className="btn-ghost px-6 py-3">
+                  How it works
+                </a>
+              </div>
             </div>
+            <HeroPreview />
           </div>
-          <HeroPreview />
+          <StaticEarth />
         </section>
 
         {/* 2. Problem */}
