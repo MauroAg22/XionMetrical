@@ -22,8 +22,8 @@ function Step({ s, active, onStep }: { s: EmergencyStep; active: boolean; onStep
         type="button"
         onClick={() => onStep?.(s.n)}
         aria-current={active ? "step" : undefined}
-        className={`w-full rounded-xl border p-3 text-left transition-colors ${
-          active ? "border-alert bg-[#2a0d14]" : "border-space-700 bg-space-850 hover:border-space-600"
+        className={`w-full rounded-[3px] border p-3 text-left transition-colors ${
+          active ? "border-alert bg-[#2a0d14]" : "border-hairline bg-space-850 hover:border-space-600"
         }`}
       >
         <span className="flex items-center gap-2">
@@ -45,6 +45,12 @@ function Step({ s, active, onStep }: { s: EmergencyStep; active: boolean; onStep
 
 export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant = "modal" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  // Give focus back to whatever opened the dialog (runs before the effect below moves focus into it).
+  useEffect(() => {
+    if (!open || variant !== "modal") return;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    return () => opener?.focus();
+  }, [open, variant]);
   useEffect(() => {
     if (!open || variant !== "modal") return;
     ref.current?.focus();
@@ -64,12 +70,12 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
       role={variant === "modal" ? "dialog" : "region"}
       aria-modal={variant === "modal" ? true : undefined}
       aria-labelledby="emergency-title"
-      className="w-full max-w-4xl rounded-2xl border-2 border-alert bg-space-900 p-4 shadow-2xl outline-none sm:p-6"
+      className="w-full max-w-4xl rounded-[3px] border-2 border-alert bg-space-900 p-4 shadow-2xl outline-none sm:p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-alert">Emergency guide</p>
-          <h2 id="emergency-title" className="text-2xl font-bold text-ink">
+          <p className="text-xs font-semibold font-display tracking-[0.04em] text-alert">Emergency guide</p>
+          <h2 id="emergency-title" className="font-display text-2xl font-bold text-ink">
             Chest pain or collapse
           </h2>
           <p className="mt-1 text-sm text-muted">
@@ -78,7 +84,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
           </p>
         </div>
         {variant === "modal" && (
-          <button type="button" onClick={onClose} className="rounded-lg border border-space-600 px-3 py-1.5 text-sm text-ink hover:bg-space-800">
+          <button type="button" onClick={onClose} className="rounded-[3px] border border-space-600 px-3 py-1.5 text-sm text-ink hover:bg-space-800">
             Close
           </button>
         )}
@@ -91,7 +97,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
       </ol>
       <div className="mt-2.5 grid gap-3 md:grid-cols-2">
         <div>
-          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-drift">If they respond</p>
+          <p className="mb-1.5 text-xs font-semibold font-display tracking-[0.04em] text-drift">If they respond</p>
           <ol className="grid gap-2.5">
             {by("responds").map((s) => (
               <Step key={s.n} s={s} active={activeStep === s.n} onStep={onStep} />
@@ -99,7 +105,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
           </ol>
         </div>
         <div>
-          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-alert">If they do not respond</p>
+          <p className="mb-1.5 text-xs font-semibold font-display tracking-[0.04em] text-alert">If they do not respond</p>
           <ol className="grid gap-2.5">
             {by("unresponsive").map((s) => (
               <Step key={s.n} s={s} active={activeStep === s.n} onStep={onStep} />
@@ -119,7 +125,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
             type="button"
             disabled={activeStep <= 1}
             onClick={() => onStep?.(Math.max(1, activeStep - 1))}
-            className="rounded-lg border border-space-600 px-4 py-2 text-sm text-ink enabled:hover:bg-space-800 disabled:opacity-40"
+            className="rounded-[3px] border border-space-600 px-4 py-2 text-sm text-ink enabled:hover:bg-space-800 disabled:opacity-40"
           >
             Previous step
           </button>
@@ -128,7 +134,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
             type="button"
             disabled={activeStep >= 8}
             onClick={() => onStep?.(Math.min(8, activeStep + 1))}
-            className="rounded-lg bg-alert px-4 py-2 text-sm font-semibold text-[#2a0303] enabled:hover:brightness-110 disabled:opacity-40"
+            className="rounded-[3px] bg-alert px-4 py-2 text-sm font-semibold text-[#2a0303] enabled:hover:brightness-110 disabled:opacity-40"
           >
             Next step
           </button>
@@ -139,7 +145,7 @@ export function EmergencyFlow({ open, onClose, activeStep = 1, onStep, variant =
 
   if (variant === "inline") return panel;
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-[#02050c]/80 p-3 backdrop-blur-sm sm:p-8" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-[#02050c]/80 p-3-sm sm:p-8" onClick={onClose}>
       <div className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
         {panel}
       </div>

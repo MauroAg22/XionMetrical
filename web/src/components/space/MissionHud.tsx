@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { formatDelay, journey, phaseName, signalDelayMinutes, transitProgress } from "./journey";
 
 export function MissionHud() {
+  const root = useRef<HTMLDivElement>(null);
   const fill = useRef<HTMLSpanElement>(null);
   const ship = useRef<HTMLSpanElement>(null);
   const day = useRef<HTMLElement>(null);
@@ -16,6 +17,7 @@ export function MissionHud() {
     const paint = () => {
       const d = journey.day;
       const p = transitProgress(d);
+      if (root.current) root.current.toggleAttribute("data-arrived", p >= 1);
       if (fill.current) fill.current.style.transform = `scaleX(${p})`;
       if (ship.current) ship.current.style.left = `${p * 100}%`;
       if (day.current) day.current.textContent = String(Math.max(1, Math.round(d)));
@@ -28,7 +30,7 @@ export function MissionHud() {
   }, []);
 
   return (
-    <div aria-hidden="true" className="hud">
+    <div ref={root} aria-hidden="true" className="hud">
       <span className="hud-end">Earth</span>
       <span className="hud-track">
         <span ref={fill} className="hud-fill" />

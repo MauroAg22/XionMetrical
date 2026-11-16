@@ -14,6 +14,7 @@ import { CheckIn } from "./CheckIn";
 import { EmergencyFlow } from "./EmergencyFlow";
 import { IndicatorList } from "./IndicatorList";
 import { IndicatorPanel } from "./IndicatorPanel";
+import { StaticSky } from "@/components/space/StaticBackdrop";
 import { SimulatedBadge, STATUS_COLOR, StatusIcon } from "./ui";
 
 // First day at or above NASA's 600 mSv career limit (red), taken from the data.
@@ -76,11 +77,14 @@ export default function DemoApp() {
   );
 
   return (
-    <div className="starfield min-h-screen pb-20">
-      <header className="sticky top-0 z-40 border-b border-space-700 bg-space-950/90 backdrop-blur">
+    <div className="min-h-screen pb-20">
+      <div aria-hidden="true" className="space-root">
+        <StaticSky />
+      </div>
+      <header className="sticky top-0 z-40 border-b border-hairline bg-space-950/95">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2.5">
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-lg font-bold tracking-tight text-ink hover:text-accent-soft">
+            <Link href="/" className="font-display text-xl font-semibold tracking-tight text-ink hover:text-accent-soft">
               XionMetrical
             </Link>
             <span className="hidden text-sm text-muted sm:inline">Interactive demo</span>
@@ -94,7 +98,7 @@ export default function DemoApp() {
               setStep(1);
               setEmergency(true);
             }}
-            className="inline-flex items-center gap-2 rounded-lg bg-alert px-4 py-2 text-sm font-bold uppercase tracking-wide text-[#2a0303] shadow-[0_0_0_3px_rgba(255,92,92,0.25)] hover:brightness-110"
+            className="inline-flex items-center gap-2 rounded-[3px] bg-alert px-4 py-2 text-sm font-bold font-display tracking-[0.04em] text-[#2a0303] shadow-[0_0_0_3px_rgba(255,92,92,0.25)] hover:brightness-110"
             aria-haspopup="dialog"
           >
             <StatusIcon status="alert" size={16} />
@@ -105,12 +109,12 @@ export default function DemoApp() {
 
       <main className="mx-auto max-w-7xl px-4 pt-4">
         <h1 className="sr-only">XionMetrical interactive demo (simulated data)</h1>
-        <section aria-label="Mission timeline" className="rounded-2xl border border-space-700 bg-space-900/85 p-4">
+        <section aria-label="Mission timeline" className="rounded-[3px] border border-hairline bg-space-900 p-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="text-xs uppercase tracking-widest text-accent-soft">{phase.name} · example astronaut · simulated</p>
-              <p className="mt-0.5 text-2xl font-bold text-ink">
-                Mission day <span className="font-mono">{day}</span>
+              <p className="text-xs font-display tracking-[0.04em] text-accent-soft">{phase.name} · example astronaut · simulated</p>
+              <p className="mt-0.5 font-display text-3xl font-bold text-ink">
+                Mission day <span className="tabular-nums">{day}</span>
                 <span className="text-base font-normal text-muted"> / {MISSION_DAYS}</span>
               </p>
             </div>
@@ -215,7 +219,7 @@ export default function DemoApp() {
 
         <div className="mt-4 grid gap-4 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-5">
-            <section aria-label="Body map" className="rounded-2xl border border-space-700 bg-space-900/85 p-3">
+            <section aria-label="Body map" className="rounded-[3px] border border-hairline bg-space-900 p-3">
               <p className="px-1 text-xs text-muted">Tap a body zone or an indicator</p>
               <BodyFigure day={day} selectedZone={INDICATOR_BY_ID[selected].zone} onSelect={(id) => select(id)} className="mx-auto max-w-[420px]" />
             </section>
@@ -229,7 +233,7 @@ export default function DemoApp() {
         <CheckIn key={day} day={day} onSelect={openPanel} className="mt-4" />
       </main>
 
-      <footer className="fixed inset-x-0 bottom-0 z-30 border-t border-space-700 bg-space-950/95 px-4 py-2 text-center text-xs text-muted backdrop-blur">
+      <footer className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-space-950/95 px-4 py-2 text-center text-xs text-muted">
         Prototype · simulated data · not a medical device
       </footer>
 

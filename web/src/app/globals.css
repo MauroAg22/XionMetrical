@@ -259,6 +259,23 @@ html[data-space="3d"] .static-planet {
   background: var(--color-space-850);
 }
 
+/* ---- Micro-interactions (only in answer to the visitor: hover, focus, arrival) ------------------- */
+header nav a,
+.panel a {
+  transition: color 0.15s ease;
+}
+/* Body map zones in the interactive demo (the video's figure has no buttons, so it is unaffected). */
+svg [role="button"] {
+  transition: filter 0.15s ease;
+}
+svg [role="button"]:hover {
+  filter: brightness(1.25);
+}
+svg [role="button"]:focus-visible {
+  outline: 2px solid var(--color-accent-soft);
+  outline-offset: 2px;
+}
+
 /* ---- Mission HUD (header) ------------------------------------------------------------------------ */
 .hud {
   display: flex;
@@ -303,6 +320,10 @@ html[data-space="3d"] .static-planet {
   border: 1px solid var(--color-accent-soft);
   background: var(--color-space-950);
   transform: translate(-50%, -50%) rotate(45deg);
+}
+.hud[data-arrived] .hud-ship {
+  background: var(--color-accent-soft);
+  box-shadow: 0 0 0 3px rgb(141 184 255 / 0.18);
 }
 .hud-read {
   display: flex;

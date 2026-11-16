@@ -54,15 +54,15 @@ function ScrollView({ progress, limit = Infinity, className = "", children }: { 
 
 function Header({ day, label }: { day: number; label: string }) {
   return (
-    <div className="flex items-center justify-between border-b border-space-700 pb-4">
+    <div className="flex items-center justify-between border-b border-hairline pb-4">
       <div className="flex items-baseline gap-4">
-        <span className="text-2xl font-bold tracking-tight text-ink">
-          Xion<span className="text-accent-soft">Metrical</span>
+        <span className="font-display text-3xl font-semibold tracking-tight text-ink">
+          XionMetrical
         </span>
         <span className="text-lg text-muted">{label}</span>
       </div>
       <div className="flex items-center gap-4">
-        <span className="rounded-full bg-space-850 px-4 py-1.5 text-lg font-semibold text-ink">Mission day {day}</span>
+        <span className="rounded-[3px] border border-hairline bg-space-900 px-4 py-1.5 font-display text-xl font-semibold tabular-nums text-ink">Mission day {day}</span>
         <SimulatedBadge />
       </div>
     </div>

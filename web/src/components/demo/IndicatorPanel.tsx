@@ -54,21 +54,21 @@ export function IndicatorPanel({ id, day, showChart = true, showGuide = true, ch
     <section
       id="indicator-panel"
       aria-labelledby={`panel-${id}`}
-      className={`rounded-2xl border border-space-700 bg-space-900/85 p-4 sm:p-5 ${className}`}
+      className={`rounded-[3px] border border-hairline bg-space-900 p-4 sm:p-5 ${className}`}
     >
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <HazardTag hazard={def.hazard} />
-            <span className="text-[11px] uppercase tracking-wide text-faint">{ZONES[def.zone].name}</span>
+            <span className="text-[11px] font-display tracking-[0.04em] text-faint">{ZONES[def.zone].name}</span>
           </div>
-          <h2 id={`panel-${id}`} className="mt-2 text-xl font-semibold text-ink">
+          <h2 id={`panel-${id}`} className="mt-2 font-display text-2xl font-semibold text-ink">
             {def.name}
           </h2>
           <p className="text-xs text-faint">Mission day {day} · simulated data</p>
         </div>
         <div className="text-right">
-          <div className="whitespace-nowrap font-mono text-3xl font-bold text-ink">
+          <div className="whitespace-nowrap tabular-nums text-3xl font-bold text-ink">
             {v.value}
             <span className="ml-1 font-sans text-base font-normal text-muted">{v.unit}</span>
           </div>
@@ -82,7 +82,7 @@ export function IndicatorPanel({ id, day, showChart = true, showGuide = true, ch
           {flagged.map((r, i) => (
             <li
               key={i}
-              className="flex flex-wrap items-center gap-2 rounded-lg border bg-space-850 px-3 py-2 text-sm"
+              className="flex flex-wrap items-center gap-2 rounded-[3px] border bg-space-850 px-3 py-2 text-sm"
               style={{ borderColor: STATUS_COLOR[r.status] }}
             >
               <StatusIcon status={r.status} size={15} />
@@ -94,13 +94,13 @@ export function IndicatorPanel({ id, day, showChart = true, showGuide = true, ch
       )}
 
       <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
-        <div className="rounded-lg bg-space-850 p-3">
-          <dt className="text-[11px] font-semibold uppercase tracking-wide text-accent-soft">Your baseline</dt>
+        <div className="rounded-[3px] bg-space-850 p-3">
+          <dt className="text-[11px] font-semibold font-display tracking-[0.04em] text-accent-soft">Your baseline</dt>
           <dd className="mt-1 text-ink">{baselineText(id, day)}</dd>
           {extra && id !== "bp" ? <dd className="mt-1 text-xs text-muted">{extra}</dd> : null}
         </div>
-        <div className="rounded-lg bg-space-850 p-3">
-          <dt className="text-[11px] font-semibold uppercase tracking-wide text-accent-soft">
+        <div className="rounded-[3px] bg-space-850 p-3">
+          <dt className="text-[11px] font-semibold font-display tracking-[0.04em] text-accent-soft">
             Reference {def.referenceKind === "general" ? "(general health, adults on Earth)" : def.referenceKind === "nasa" ? "(NASA)" : "(baseline only)"}
           </dt>
           <dd className="mt-1 text-ink">{def.reference.text}</dd>
@@ -168,11 +168,11 @@ export function GuideLayers({ id, day, className = "" }: { id: IndicatorId; day:
   ];
   return (
     <section aria-label="Guidance in four layers" className={className}>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-accent-soft">Guidance · every line cites its source</h3>
+      <h3 className="text-sm font-semibold font-display tracking-[0.04em] text-accent-soft">Guidance · every line cites its source</h3>
       <ol className="mt-2 grid gap-2.5">
         {layers.map((l) => (
-          <li key={l.k} className="rounded-xl border border-space-700 bg-space-850/70 p-3">
-            <h4 className="mb-1.5 flex items-center gap-2 text-sm font-semibold text-ink">
+          <li key={l.k} className="rounded-[3px] border border-hairline bg-space-850 p-3">
+            <h4 className="mb-1.5 flex items-center gap-2 font-display text-base font-semibold text-ink">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-space-700 text-[11px] text-accent-soft">{l.k}</span>
               {l.title}
             </h4>

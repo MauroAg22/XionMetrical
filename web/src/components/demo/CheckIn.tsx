@@ -110,19 +110,19 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
   };
 
   return (
-    <section id="check-in" aria-labelledby={`${uid}-title`} className={`scroll-mt-20 rounded-2xl border border-space-700 bg-space-900/85 p-4 ${className}`}>
+    <section id="check-in" aria-labelledby={`${uid}-title`} className={`scroll-mt-20 rounded-[3px] border border-hairline bg-space-900 p-4 ${className}`}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 id={`${uid}-title`} className="text-lg font-bold text-ink">
-          Today&apos;s check-in · mission day <span className="font-mono">{day}</span>
+        <h2 id={`${uid}-title`} className="font-display text-xl font-bold text-ink">
+          Today&apos;s check-in · mission day <span className="tabular-nums">{day}</span>
         </h2>
         <p className="text-xs text-muted">Reminders and manual entry · not a diagnosis</p>
       </div>
 
       <div className="mt-3 grid gap-4 lg:grid-cols-2">
         {/* ---- Reminders ---- */}
-        <div className="rounded-xl border border-space-700 bg-space-850/60 p-3">
+        <div className="rounded-[3px] border border-hairline bg-space-850 p-3">
           <div className="flex items-center justify-between gap-2">
-            <h3 className="font-semibold text-ink">Measurement reminders</h3>
+            <h3 className="font-display text-lg font-semibold text-ink">Measurement reminders</h3>
             <span className="text-xs text-muted" aria-live="polite">
               {doneCount} of {due.length} done today
             </span>
@@ -132,7 +132,7 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
               const items = ROUTINE.filter((r) => r.slot === slot);
               return (
                 <li key={slot}>
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent-soft">{SLOT_LABEL[slot]}</p>
+                  <p className="text-[11px] font-semibold font-display tracking-[0.04em] text-accent-soft">{SLOT_LABEL[slot]}</p>
                   <ul className="mt-1 divide-y divide-space-700/70">
                     {items.map((r) => {
                       const def = INDICATOR_BY_ID[r.id];
@@ -200,8 +200,8 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
         </div>
 
         {/* ---- Log today's measurements ---- */}
-        <div className="rounded-xl border border-space-700 bg-space-850/60 p-3">
-          <h3 className="font-semibold text-ink">Log today&apos;s measurements</h3>
+        <div className="rounded-[3px] border border-hairline bg-space-850 p-3">
+          <h3 className="font-display text-lg font-semibold text-ink">Log today&apos;s measurements</h3>
           <p className="mt-0.5 text-xs text-muted">
             Type your own values (leave a field empty to skip it). They are checked with the same rule, against this example astronaut&apos;s baseline and previous days.
           </p>
@@ -223,7 +223,7 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
                     onChange={(e) => setValues((v) => ({ ...v, [f.id]: e.target.value }))}
                     aria-invalid={errors[f.id] ? true : undefined}
                     aria-describedby={errors[f.id] ? `${uid}-${f.id}-err` : undefined}
-                    className="w-32 rounded-lg border border-space-600 bg-space-950 px-3 py-2 font-mono text-ink placeholder:text-faint focus:border-accent"
+                    className="w-32 rounded-[3px] border border-space-600 bg-space-950 px-3 py-2 tabular-nums text-ink placeholder:text-faint focus:border-accent"
                     placeholder={f.id === "hr" ? "62" : "7.0"}
                   />
                   <span className="text-sm text-muted">{f.unit}</span>
@@ -250,7 +250,7 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
                       onChange={() => setValues((v) => ({ ...v, mood: String(n) }))}
                       className="peer sr-only"
                     />
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-space-600 font-mono text-muted peer-checked:border-accent peer-checked:bg-accent peer-checked:font-bold peer-checked:text-space-950 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-accent-soft hover:text-ink">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-[3px] border border-space-600 tabular-nums text-muted peer-checked:border-accent peer-checked:bg-accent peer-checked:font-bold peer-checked:text-space-950 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-accent-soft hover:text-ink">
                       {n}
                     </span>
                   </label>
@@ -258,10 +258,10 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
               </div>
             </fieldset>
             <div className="flex flex-wrap gap-2 pt-1">
-              <button type="submit" className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-space-950 hover:brightness-110">
+              <button type="submit" className="rounded-[3px] bg-accent px-4 py-2 text-sm font-semibold text-space-950 hover:brightness-110">
                 Check against my baseline
               </button>
-              <button type="button" onClick={fillSimulated} className="rounded-lg border border-space-600 px-3 py-2 text-sm text-muted hover:text-ink">
+              <button type="button" onClick={fillSimulated} className="rounded-[3px] border border-space-600 px-3 py-2 text-sm text-muted hover:text-ink">
                 Fill with today&apos;s simulated values
               </button>
               <button
@@ -271,7 +271,7 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
                   setErrors({});
                   setResults(null);
                 }}
-                className="rounded-lg px-3 py-2 text-sm text-faint hover:text-ink"
+                className="rounded-[3px] px-3 py-2 text-sm text-faint hover:text-ink"
               >
                 Clear
               </button>
@@ -287,10 +287,10 @@ export function CheckIn({ day, onSelect, className = "" }: Props) {
                   const band = a.channels[0]?.band;
                   const action = actionsFor(field.id, a.status)[0];
                   return (
-                    <li key={field.id} className="rounded-lg border p-3" style={{ borderColor: `${STATUS_COLOR[a.status]}66` }}>
+                    <li key={field.id} className="rounded-[3px] border p-3" style={{ borderColor: `${STATUS_COLOR[a.status]}66` }}>
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <p className="text-sm font-semibold text-ink">
-                          {def.name}: <span className="font-mono">{fmt(value, ch.decimals)}</span> {field.unit}
+                          {def.name}: <span className="tabular-nums">{fmt(value, ch.decimals)}</span> {field.unit}
                         </p>
                         <StatusPill status={a.status} />
                       </div>

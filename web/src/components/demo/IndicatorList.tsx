@@ -27,8 +27,8 @@ export function IndicatorList({ day, selected = null, onSelect, className = "" }
               onClick={() => onSelect?.(a.id)}
               aria-pressed={isSel}
               aria-label={`${def.name}: ${v.value} ${v.unit}, ${STATUS_LABEL[a.status]}`}
-              className={`group relative w-full overflow-hidden rounded-xl border bg-space-900/80 px-3 py-2.5 text-left transition-colors hover:bg-space-850 ${
-                isSel ? "border-accent-soft ring-1 ring-accent-soft" : "border-space-700"
+              className={`group relative w-full overflow-hidden rounded-[3px] border bg-space-900 px-3 py-2.5 text-left transition-colors hover:bg-space-850 ${
+                isSel ? "border-accent-soft ring-1 ring-accent-soft" : "border-hairline"
               }`}
             >
               <span className="absolute inset-y-0 left-0 w-1" style={{ background: c, opacity: a.status === "normal" ? 0.55 : 1 }} aria-hidden />
@@ -39,7 +39,7 @@ export function IndicatorList({ day, selected = null, onSelect, className = "" }
                 </span>
                 <StatusIcon status={a.status} size={15} />
               </span>
-              <span className="mt-1 block whitespace-nowrap font-mono text-lg font-semibold leading-6 text-ink">
+              <span className="mt-1 block whitespace-nowrap tabular-nums text-lg font-display font-semibold leading-6 text-ink">
                 {v.value}
                 <span className="ml-1 font-sans text-xs font-normal text-muted">{v.unit}</span>
               </span>

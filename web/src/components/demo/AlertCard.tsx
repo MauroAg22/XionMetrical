@@ -17,7 +17,7 @@ export function AlertCard({ day, onSelect, className = "" }: Props) {
     return (
       <section
         aria-live="polite"
-        className={`flex items-start gap-3 rounded-2xl border bg-space-900/85 px-4 py-3 ${className}`}
+        className={`flex items-start gap-3 rounded-[3px] border bg-space-900 px-4 py-3 ${className}`}
         style={{ borderColor: building ? "var(--color-space-600)" : "var(--color-ok)" }}
       >
         <StatusIcon status="normal" size={20} />
@@ -44,7 +44,7 @@ export function AlertCard({ day, onSelect, className = "" }: Props) {
     <section
       aria-live="polite"
       aria-label="Early warning"
-      className={`rounded-2xl border-2 bg-space-900/90 px-4 py-3 ${className}`}
+      className={`rounded-[3px] border-2 bg-space-900 px-4 py-3 ${className}`}
       style={{ borderColor: STATUS_COLOR[worst], boxShadow: `0 0 0 4px color-mix(in srgb, ${STATUS_COLOR[worst]} 14%, transparent)` }}
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -60,7 +60,7 @@ export function AlertCard({ day, onSelect, className = "" }: Props) {
             <button
               type="button"
               onClick={() => onSelect?.(a.id)}
-              className="flex w-full items-center gap-2 rounded-lg bg-space-850 px-3 py-2 text-left text-sm text-ink hover:bg-space-800"
+              className="flex w-full items-center gap-2 rounded-[3px] bg-space-850 px-3 py-2 text-left text-sm text-ink hover:bg-space-800"
             >
               <StatusIcon status={a.status} size={15} title={STATUS_LABEL[a.status]} />
               <span>{a.headline}</span>
