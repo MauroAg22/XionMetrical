@@ -9,6 +9,10 @@ import type { HazardId } from "@/lib/model";
 import { SOURCE_LIST } from "@/lib/sources";
 
 const REPO_URL = "https://github.com/MauroAg22/XionMetrical";
+// The presentation video published in the repository. The site serves a copy from its own origin
+// (scripts/copy-video.mjs) and falls back to this link.
+const VIDEO_URL = `${REPO_URL}/raw/refs/heads/master/out/xionmetrical-demo.mp4`;
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const TEAM = [
   { name: "Ezequiel Adrián Vilchez Baigorria", url: "https://ezequiel-vilchez-portafolio.vercel.app/", label: "Portfolio", email: "vilchezezequiel9@gmail.com" },
@@ -31,6 +35,7 @@ const NAV = [
   ["#how", "How it works"],
   ["#inside", "Inside"],
   ["#demo", "Demo"],
+  ["#video", "Video"],
   ["#references", "NASA data"],
   ["#ai", "Use of AI"],
   ["#team", "Team"],
@@ -268,7 +273,38 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 6. NASA data & references */}
+        {/* 6. Video */}
+        <Section id="video" eyebrow="Video" title="30 seconds: what if he'd seen it coming?">
+          <figure className="panel ticks relative max-w-4xl">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster={`${BASE}/video/xionmetrical-demo-poster.jpg`}
+              width={1920}
+              height={1080}
+              aria-label="XionMetrical presentation video, 29.5 seconds, English narration"
+              className="block aspect-video h-auto w-full bg-space-950"
+            >
+              <source src={`${BASE}/video/xionmetrical-demo.mp4`} type="video/mp4" />
+              <source src={VIDEO_URL} type="video/mp4" />
+              Your browser can&apos;t play this video here.{" "}
+              <a href={VIDEO_URL} className={LINK}>
+                Open the MP4 on GitHub
+              </a>
+              .
+            </video>
+            <figcaption className="px-5 py-4 text-sm text-muted sm:px-6">
+              29.5 s · English narration. Vector animation built with code (labeled “AI-assisted animation”), AI narration (Piper TTS) and
+              synthesized sound effects; the app scenes are the real demo with simulated data.{" "}
+              <a href={VIDEO_URL} className={LINK}>
+                Open the MP4 on GitHub
+              </a>
+            </figcaption>
+          </figure>
+        </Section>
+
+        {/* 7. NASA data & references */}
         <Section id="references" eyebrow="NASA data & references" title="Where every number and every tip comes from">
           <div className="panel ticks">
             <p className={`${CELL} max-w-4xl text-muted`}>

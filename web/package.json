@@ -5,7 +5,9 @@
   "type": "module",
   "description": "XionMetrical — prototype (simulated data, not a medical device). Code written with AI assistance (Claude Code); see README 'AI usage'.",
   "scripts": {
+    "predev": "node scripts/copy-video.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/copy-video.mjs",
     "build": "next build",
     "test": "node --test \"src/lib/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"

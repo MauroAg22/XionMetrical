@@ -4,6 +4,8 @@ node_modules/
 # Compilados de la web
 web/.next/
 web/out/
+# Copia del video que hace web/scripts/copy-video.mjs (el original es out/xionmetrical-demo.mp4)
+web/public/video/xionmetrical-demo.mp4
 web/next-env.d.ts
 *.tsbuildinfo
 
