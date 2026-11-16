@@ -84,6 +84,7 @@ Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_P
 | Path | What |
 |---|---|
 | `web/` | Next.js (App Router, TypeScript, Tailwind) static site: landing `/` and demo `/demo` |
+| `web/src/components/space/` | Landing backdrop: 3D Earth → Mars journey driven by the scroll (three.js + React Three Fiber, procedural shaders, no textures), loaded after the page; static 2D fallback for no WebGL, low-end devices and reduced motion |
 | `web/src/lib/` | Indicator catalogue, simulation, traffic-light rule, measurement routine, guidance texts and sources (pure TypeScript) |
 | `web/src/components/demo/` | Pure demo components (also reused by the video renderer) |
 | `web/src/video/` | Video mode of the demo: the same components driven by one clock, served at `/video-scene/` (render only, not linked, `noindex`) |
@@ -116,7 +117,7 @@ Every source cited by the app, with its ID and URL, is listed in `web/src/lib/so
 ## AI usage (SI)
 
 - **Planning and research support:** Claude Code (Anthropic) with Claude Sonnet 5.5 read and paraphrased the NASA, CSA and health-agency sources into a knowledge base and proposed options; the team accepted or rejected each one (each proposal and its outcome is logged in the team's internal declarations registry).
-- **Code:** the website, the demo, the tests and the video pipeline were written with Claude Code (Claude Opus 5.5) and reviewed by the team. Commits carry a `Co-Authored-By` trailer.
+- **Code:** the website, the demo, the tests and the video pipeline were written with Claude Code (Claude Opus 5.5) and reviewed by the team. This includes the landing's 3D space scene: Earth, Mars, the stars and the Milky Way are drawn in real time by shaders written with AI (procedural, no images or textures). Commits carry a `Co-Authored-By` trailer.
 - **Guidance texts:** drafted with AI from the cited sources — every line shows its source — and reviewed by the team.
 - **Video:** vector animation built with code with AI assistance (on-screen label "AI-assisted animation"); narration generated locally with **Piper TTS** (voice `en_US-joe-medium`, CC0 dataset); sound effects synthesized by code. No AI-generated images or video clips. Declared in the video metadata too.
 - **Team decisions:** the idea (an early warning against each astronaut's own baseline on a Mars mission), the name and the slogan are the team's. **The app contains no AI**: guidance is fixed, sourced text.
@@ -129,6 +130,8 @@ Every source cited by the app, with its ID and URL, is listed in `web/src/lib/so
 | Next.js | 16.4.6 | MIT |
 | React / React DOM | 19.3.1 | MIT |
 | Tailwind CSS (+ @tailwindcss/postcss) | 4.3.5 | MIT |
+| three.js | 0.187.0 | MIT |
+| React Three Fiber (@react-three/fiber) | 9.8.2 | MIT |
 | TypeScript | 5.9.3 | Apache-2.0 |
 | Playwright (playwright-core) | 1.65.1 | Apache-2.0 |
 | Piper TTS (piper-tts) — local tool, not distributed | 1.8.0 | GPL-3.0-or-later |

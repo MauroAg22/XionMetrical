@@ -331,7 +331,8 @@ export default function Home() {
                   </li>
                   <li>
                     <strong className="text-ink">Code:</strong> this website and the demo were written with Claude Code (Claude Opus 5.5) and reviewed by
-                    the team.
+                    the team. That includes the space scene behind this page: Earth, Mars, the stars and the Milky Way are drawn in real time by
+                    shaders written with AI (procedural, no images or textures).
                   </li>
                   <li>
                     <strong className="text-ink">Guidance texts:</strong> drafted with AI from the cited sources — every line shows its source — and
