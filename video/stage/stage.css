@@ -69,7 +69,9 @@ svg { overflow: hidden; }
 #team { position: absolute; left: 0; top: 318px; width: 1920px; text-align: center; font-family: var(--display); font-variation-settings: "wght" 650; font-weight: 650; font-size: 112px; letter-spacing: .01em; }
 #names { position: absolute; left: 0; top: 520px; width: 1920px; text-align: center; font-size: 42px; line-height: 1.75; color: var(--muted); }
 #names span { display: inline-block; margin: 0 26px; }
-#logos { position: absolute; left: 0; top: 900px; width: 1920px; height: 180px; opacity: 0; }
+#logos { position: absolute; left: 0; top: 900px; width: 1920px; height: 180px; opacity: 0; background: #fff;
+  display: flex; align-items: center; justify-content: center; }
+#logo { display: block; width: 152px; height: 157px; } /* natural size: the official image is not scaled or altered */
 
 /* rewind */
 #scan { background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .3) 0 2px, transparent 2px 5px); }

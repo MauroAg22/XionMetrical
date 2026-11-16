@@ -75,7 +75,7 @@ npm run dev     # http://localhost:3000
 npm run build   # static export to web/out
 ```
 
-**Video** (optional; needs local Piper TTS, FFmpeg and Google Chrome): the scripts in `video/scripts/` generate the narration, synthesize the sound and render the frames from the `/video-scene/` page (`cd video && npm install`, then `npm run render:live` while `npx next dev -p 3100` runs in `web/`). The official logos of the closing card are not in this repository: the render reads them from a local `assets/logos/` folder.
+**Video** (optional; needs local Piper TTS, FFmpeg and Google Chrome): the scripts in `video/scripts/` generate the narration, synthesize the sound and render the frames from the `/video-scene/` page (`cd video && npm install`, then `npm run render:live` while `npx next dev -p 3100` runs in `web/`). The official NASA Space Apps Challenge logo of the closing card is not in this repository: the render reads it from a local `assets/logos/` folder.
 
 Deployment: `.github/workflows/pages.yml` builds `web/` with `NEXT_PUBLIC_BASE_PATH=/XionMetrical` and publishes `web/out` to GitHub Pages on every push to `master`.
 
@@ -120,7 +120,7 @@ Every source cited by the app, with its ID and URL, is listed in `web/src/lib/so
 - **Guidance texts:** drafted with AI from the cited sources — every line shows its source — and reviewed by the team.
 - **Video:** vector animation built with code with AI assistance (on-screen label "AI-assisted animation"); narration generated locally with **Piper TTS** (voice `en_US-joe-medium`, CC0 dataset); sound effects synthesized by code. No AI-generated images or video clips. Declared in the video metadata too.
 - **Team decisions:** the idea (an early warning against each astronaut's own baseline on a Mars mission), the name and the slogan are the team's. **The app contains no AI**: guidance is fixed, sourced text.
-- **NASA branding:** none was generated, drawn or modified with AI. The official NASA and NASA Space Apps logos appear only in the video's closing card, as the unmodified official files placed by the render script.
+- **NASA branding:** none was generated, drawn or modified with AI. Only the official NASA Space Apps Challenge logo appears, in the video's closing card, as the unmodified official file placed by the render script; the NASA insignia is not used.
 
 ## Open-source software
 

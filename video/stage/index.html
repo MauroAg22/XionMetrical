@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <title>XionMetrical video stage</title>
 <!-- XionMetrical demo video stage (1920×1080). AI-assisted animation (Claude Opus 5.5 in Claude Code).
-     One clock: window.seek(t). Faceless silhouette; no NASA branding is drawn — the official logo strip
-     (assets/logos/logo-strip-1920x180.png, read in place) is shown unmodified. -->
+     One clock: window.seek(t). Faceless silhouette; no NASA branding is drawn — the official NASA Space Apps
+     Challenge logo (assets/logos/space-apps-logo-black.png, read in place) is shown unmodified, at its natural
+     size, on a plain white band. The NASA insignia is not used. -->
 <link rel="stylesheet" href="stage.css">
 </head>
 <body>
@@ -168,13 +169,13 @@
     </svg>
   </div>
 
-  <!-- credits + official logo strip (unmodified image, opacity fade only) -->
+  <!-- credits + official NASA Space Apps Challenge logo (unmodified image at natural size on a plain white band; opacity fade only) -->
   <div id="credits">
     <div id="next"><span class="lbl">Next:</span>
       <svg class="ico" viewBox="0 0 48 48"><rect x="14" y="12" width="20" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M18 12 V4 h12 v8 M18 36 v8 h12 v-8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 18 v6 l4 3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>wearables<span class="sep">·</span><svg class="ico" viewBox="0 0 48 48"><circle cx="32" cy="30" r="11" fill="none" stroke="currentColor" stroke-width="3"/><path d="M21 30 h22 M32 19 c-6 6 -6 16 0 22 M32 19 c6 6 6 16 0 22" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="3.5" fill="currentColor"/><path d="M11 14 L22 22" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 3"/></svg>Earth link</div>
     <div id="team">Team Space Mercedes</div>
     <div id="names"><span>Ezequiel Adrián Vilchez Baigorria</span><span>Mauro Agustín Lucero</span><span>Alejandro Héctor Rodriguez</span><br><span>Esteban David Torres</span><span>Cristian Emanuel Cáceres</span></div>
-    <img id="logos" src="/__assets/logos/logo-strip-1920x180.png" width="1920" height="180" alt="NASA and NASA Space Apps Challenge logos">
+    <div id="logos"><img id="logo" src="/__assets/logos/space-apps-logo-black.png" width="152" height="157" alt="NASA Space Apps Challenge logo"></div>
   </div>
 
   <!-- tape rewind effects -->

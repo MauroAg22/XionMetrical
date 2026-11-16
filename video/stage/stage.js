@@ -1,8 +1,9 @@
 /* XionMetrical — video stage, 1920×1080. ONE clock: window.seek(t) draws the exact frame at t seconds
    (everything is derived from t: no timers, no CSS animations, seeded randomness only).
    AI-ASSISTED ANIMATION (Claude Opus 5.5 in Claude Code) — declared in docs/registro-video.md.
-   Faceless silhouette that floats (microgravity). No NASA branding is drawn: the official logo strip is
-   an <img> shown unmodified (opacity fade only). "AI-assisted animation" stays visible the whole video. */
+   Faceless silhouette that floats (microgravity). No NASA branding is drawn: the official NASA Space Apps
+   Challenge logo is an <img> shown unmodified at its natural size (opacity fade only); the NASA insignia is
+   not used. "AI-assisted animation" stays visible the whole video. */
 (() => {
   "use strict";
   const TL = window.TIMELINE;
@@ -399,7 +400,7 @@
 
   (async () => {
     await document.fonts.ready;
-    try { await E.logos.decode(); } catch { /* still shown when loaded */ }
+    try { await E.logo.decode(); } catch { /* still shown when loaded */ }
     ECG_LEN = E.ecgLine.getTotalLength();
     E.ecgLine.style.strokeDasharray = `${ECG_LEN} ${ECG_LEN}`;
     E.ecgPulse.style.strokeDasharray = `160 ${ECG_LEN + 400}`;
